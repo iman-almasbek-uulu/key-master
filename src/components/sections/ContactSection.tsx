@@ -9,7 +9,7 @@ function ContactInfo() {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+        <h2 className="text-3xl md:text-4xl font-semibold text-white mb-6 tracking-tight">
           Контакты
         </h2>
       </div>
@@ -40,7 +40,7 @@ function ContactInfo() {
           variant="primary"
           size="md"
           href={socialLinks.whatsapp}
-          className="w-full sm:w-auto"
+          className="w-full sm:w-auto bg-[#25D366] hover:bg-[#1ebe5a] border border-[#1ebe5a]/70 text-white transition-colors duration-200"
         >
           <MessageCircle size={20} className="mr-2" />
           Написать в WhatsApp
@@ -50,7 +50,7 @@ function ContactInfo() {
           variant="outline"
           size="md"
           href={socialLinks.telegram}
-          className="w-full sm:w-auto ml-0 sm:ml-3"
+          className="w-full sm:w-auto ml-0 sm:ml-3 border-[#229ED9]/80 bg-[#229ED9] text-white hover:bg-[#1b8ec4] hover:border-[#1b8ec4]/90 hover:text-white transition-colors duration-200"
         >
           <Send size={20} className="mr-2" />
           Написать в Telegram
@@ -84,12 +84,15 @@ function ContactInfo() {
 
 export function ContactSection() {
   return (
-    <Section id="contacts">
+    <Section
+      id="contacts"
+      className="bg-gradient-to-b from-slate-950 via-emerald-950 to-slate-950"
+    >
       <Container>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <ContactInfo />
 
-          <div className="bg-slate-800/50 border border-slate-700 rounded-xl overflow-hidden h-[400px] lg:h-auto">
+          <div className="bg-slate-950/70 border border-slate-800/80 rounded-2xl overflow-hidden h-[400px] lg:h-auto shadow-[0_18px_40px_rgba(15,23,42,0.7)]">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2924.0989419304154!2d74.58544731549639!3d42.87468500815282!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x389eb7dcc9e8b6bb%3A0x72b0c8a9e84e1234!2sBishkek!5e0!3m2!1sen!2skg!4v1234567890123!5m2!1sen!2skg"
               width="100%"

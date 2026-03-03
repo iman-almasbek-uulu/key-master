@@ -40,18 +40,20 @@ function StepCard({ step }: { step: Step }) {
   const Icon = step.icon;
 
   return (
-    <div className="relative">
-      <div className="flex flex-col items-center text-center">
-        <div className="relative mb-6">
-          <div className="bg-slate-500 p-4 rounded-full">
-            <Icon size={28} className="text-white" />
+    <div className="relative group">
+      <div className="flex flex-col items-center text-center gap-3 rounded-2xl border border-slate-800/80 bg-slate-950/70 px-5 py-6 shadow-[0_18px_40px_rgba(15,23,42,0.7)]">
+        <div className="relative mb-2">
+          <div className="bg-slate-900/90 px-4 py-3 rounded-full">
+            <Icon size={26} className="text-cyan-300 group-hover:text-cyan-200 transition-colors duration-300" />
           </div>
-          <div className="absolute -top-2 -right-2 bg-slate-700 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm">
+          <div className="absolute -top-2 -right-2 bg-cyan-500 text-slate-950 w-8 h-8 rounded-full flex items-center justify-center font-semibold text-xs">
             {step.number}
           </div>
         </div>
-        <h3 className="text-xl font-semibold text-white mb-2">{step.title}</h3>
-        <p className="text-slate-400 leading-relaxed">{step.description}</p>
+        <h3 className="text-lg font-semibold text-white">{step.title}</h3>
+        <p className="text-slate-300/90 leading-relaxed text-sm md:text-base">
+          {step.description}
+        </p>
       </div>
     </div>
   );
@@ -59,13 +61,16 @@ function StepCard({ step }: { step: Step }) {
 
 export function StepsSection() {
   return (
-    <Section id="steps" className="bg-slate-900/50">
+    <Section
+      id="steps"
+      className="bg-gradient-to-b from-slate-950 via-violet-950 to-slate-950"
+    >
       <Container>
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+        <div className="text-center mb-12 space-y-3">
+          <h2 className="text-3xl md:text-4xl font-semibold text-white tracking-tight">
             Как мы работаем
           </h2>
-          <p className="text-slate-400 text-lg max-w-2xl mx-auto">
+          <p className="text-slate-400 text-base md:text-lg max-w-2xl mx-auto">
             Простой процесс от заявки до готового ключа
           </p>
         </div>

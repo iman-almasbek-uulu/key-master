@@ -18,7 +18,7 @@ const brands = [
 
 function BrandBadge({ name }: { name: string }) {
   return (
-    <div className="bg-slate-800 border border-slate-700 rounded-lg px-6 py-3 text-slate-200 font-medium hover:border-slate-600 hover:bg-slate-700/50 transition-all duration-200">
+    <div className="rounded-xl border border-slate-800/80 bg-slate-950/70 px-6 py-3 text-slate-100/90 font-medium hover:border-cyan-500/60 hover:text-cyan-100 transition-colors duration-200">
       {name}
     </div>
   );
@@ -26,13 +26,16 @@ function BrandBadge({ name }: { name: string }) {
 
 export function BrandsSection() {
   return (
-    <Section id="brands">
+    <Section
+      id="brands"
+      className="bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950"
+    >
       <Container>
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+        <div className="text-center mb-12 space-y-3">
+          <h2 className="text-3xl md:text-4xl font-semibold text-white tracking-tight">
             Популярные марки автомобилей
           </h2>
-          <p className="text-slate-400 text-lg max-w-2xl mx-auto">
+          <p className="text-slate-400 text-base md:text-lg max-w-2xl mx-auto">
             Работаем со всеми популярными марками и многими другими
           </p>
         </div>
@@ -44,7 +47,9 @@ export function BrandsSection() {
         </div>
 
         <div className="text-center mt-8">
-          <p className="text-slate-400">И многие другие марки автомобилей</p>
+          <p className="text-slate-500 text-sm md:text-base">
+            И многие другие марки автомобилей
+          </p>
         </div>
       </Container>
     </Section>

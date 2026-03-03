@@ -15,15 +15,17 @@ function ServiceCard({ service }: { service: Service }) {
   const Icon = iconMap[service.icon as keyof typeof iconMap];
 
   return (
-    <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-6 hover:border-slate-600 transition-colors duration-200">
-      <div className="flex flex-col items-center text-center">
-        <div className="bg-slate-700/50 p-4 rounded-lg mb-4">
-          <Icon size={32} className="text-slate-300" />
+    <div className="group rounded-2xl border border-slate-800/80 bg-slate-900/70 p-6 shadow-[0_18px_40px_rgba(15,23,42,0.7)] hover:border-cyan-500/60 hover:shadow-[0_20px_45px_rgba(8,47,73,0.9)] transition-all duration-300">
+      <div className="flex flex-col items-center text-center gap-3">
+        <div className="rounded-xl bg-slate-800/80 px-4 py-3 flex items-center justify-center">
+          <Icon size={30} className="text-cyan-300 group-hover:text-cyan-200 transition-colors duration-300" />
         </div>
-        <h3 className="text-xl font-semibold text-white mb-2">
+        <h3 className="text-xl font-semibold text-white">
           {service.title}
         </h3>
-        <p className="text-slate-400 leading-relaxed">{service.description}</p>
+        <p className="text-slate-300/90 leading-relaxed text-sm md:text-base">
+          {service.description}
+        </p>
       </div>
     </div>
   );
@@ -31,18 +33,21 @@ function ServiceCard({ service }: { service: Service }) {
 
 export function ServicesSection() {
   return (
-    <Section id="services" className="bg-[#082D36]">
+    <Section
+      id="services"
+      className="bg-gradient-to-b from-slate-950 via-slate-900 to-sky-950"
+    >
       <Container>
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+        <div className="text-center mb-12 space-y-3">
+          <h2 className="text-3xl md:text-4xl font-semibold text-white tracking-tight">
             Наши услуги
           </h2>
-          <p className="text-slate-400 text-lg max-w-2xl mx-auto">
+          <p className="text-slate-400 text-base md:text-lg max-w-2xl mx-auto">
             Полный спектр услуг по работе с автомобильными ключами
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-7">
           {services.map((service) => (
             <ServiceCard key={service.id} service={service} />
           ))}
