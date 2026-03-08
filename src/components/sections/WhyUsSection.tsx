@@ -35,9 +35,9 @@ function AdvantageCard({ advantage }: { advantage: Advantage }) {
   const Icon = advantage.icon;
 
   return (
-    <div className="group rounded-2xl border border-slate-800/80 bg-slate-950/70 p-6 shadow-[0_18px_40px_rgba(15,23,42,0.7)] hover:border-cyan-500/60 hover:shadow-[0_20px_45px_rgba(8,47,73,0.9)] transition-all duration-300">
+    <div className="group rounded-2xl border border-cyan-400/60 bg-black text-white p-6 shadow-[0_18px_40px_rgba(0,0,0,0.9)] hover:border-cyan-300/90 hover:shadow-[0_22px_50px_rgba(8,47,73,0.95)] transition-all duration-300">
       <div className="flex items-start gap-4">
-        <div className="bg-slate-900/80 p-3 rounded-xl flex-shrink-0">
+        <div className="bg-slate-900 p-3 rounded-xl flex-shrink-0">
           <Icon size={24} className="text-cyan-300 group-hover:text-cyan-200 transition-colors duration-300" />
         </div>
         <div>

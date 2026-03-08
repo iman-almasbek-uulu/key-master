@@ -1,4 +1,4 @@
-import { Wrench, Key, ShoppingBag, Cpu, ShieldCheck } from "lucide-react";
+import { Wrench, Key, ShoppingBag, Cpu, ShieldCheck, MapPin } from "lucide-react";
 import { Container } from "@/src/components/ui/container";
 import { Section } from "@/src/components/ui/section";
 import { services, Service } from "@/src/data/services";
@@ -9,13 +9,14 @@ const iconMap = {
   "shopping-bag": ShoppingBag,
   cpu: Cpu,
   "shield-check": ShieldCheck,
+  "map-pin": MapPin,
 };
 
 function ServiceCard({ service }: { service: Service }) {
   const Icon = iconMap[service.icon as keyof typeof iconMap];
 
   return (
-    <div className="group rounded-2xl border border-slate-800/80 bg-slate-900/70 p-6 shadow-[0_18px_40px_rgba(15,23,42,0.7)] hover:border-cyan-500/60 hover:shadow-[0_20px_45px_rgba(8,47,73,0.9)] transition-all duration-300">
+    <div className="group rounded-2xl border border-slate-800 bg-slate-900 p-6 shadow-[0_18px_40px_rgba(15,23,42,0.7)] hover:border-cyan-500/60 hover:shadow-[0_20px_45px_rgba(8,47,73,0.9)] transition-all duration-300">
       <div className="flex flex-col items-center text-center gap-3">
         <div className="rounded-xl bg-slate-800/80 px-4 py-3 flex items-center justify-center">
           <Icon size={30} className="text-cyan-300 group-hover:text-cyan-200 transition-colors duration-300" />
@@ -35,7 +36,7 @@ export function ServicesSection() {
   return (
     <Section
       id="services"
-      className="bg-gradient-to-b from-slate-950 via-slate-900 to-sky-950"
+      className=""
     >
       <Container>
         <div className="text-center mb-12 space-y-3">

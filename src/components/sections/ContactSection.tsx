@@ -19,20 +19,12 @@ function ContactInfo() {
           <MapPin size={24} className="text-slate-400 flex-shrink-0 mt-1" />
           <div>
             <h3 className="text-white font-semibold mb-1">Местоположение</h3>
-            <p className="text-slate-300">{siteConfig.city}</p>
+            <p className="text-slate-300">{siteConfig.address}</p>
             <p className="text-slate-400 text-sm mt-1">
-              Точный адрес отправим в WhatsApp или Telegram
+              {siteConfig.city}
             </p>
           </div>
-        </div>
-
-        <div className="flex items-start gap-3">
-          <Clock size={24} className="text-slate-400 flex-shrink-0 mt-1" />
-          <div>
-            <h3 className="text-white font-semibold mb-1">График работы</h3>
-            <p className="text-slate-300">{siteConfig.workingHours}</p>
-          </div>
-        </div>
+        </div>  
       </div>
 
       <div className="pt-6 space-y-3">
@@ -92,15 +84,19 @@ export function ContactSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <ContactInfo />
 
-          <div className="bg-slate-950/70 border border-slate-800/80 rounded-2xl overflow-hidden h-[400px] lg:h-auto shadow-[0_18px_40px_rgba(15,23,42,0.7)]">
+          <div className="relative bg-slate-950/70 border border-slate-800/80 rounded-2xl overflow-hidden h-[400px] lg:h-auto shadow-[0_18px_40px_rgba(15,23,42,0.7)]">
+            <div className="pointer-events-none absolute top-4 left-4 z-10 inline-flex items-center gap-2 rounded-full bg-black/70 px-3 py-1 text-xs text-slate-100 border border-slate-700/80">
+              <MapPin size={14} className="text-red-400" />
+              <span>Мы здесь</span>
+            </div>
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2924.0989419304154!2d74.58544731549639!3d42.87468500815282!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x389eb7dcc9e8b6bb%3A0x72b0c8a9e84e1234!2sBishkek!5e0!3m2!1sen!2skg!4v1234567890123!5m2!1sen!2skg"
-              width="100%"
-              height="100%"
+              src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d665.3788696188325!2d74.52215277697081!3d42.874415550338306!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNDLCsDUyJzI3LjkiTiA3NMKwMzEnMTguNyJF!5e1!3m2!1sru!2skg!4v1772969722839!5m2!1sru!2skg"
+              width="600"
+              height="450"
               style={{ border: 0 }}
+              allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              title="Карта Бишкека"
             />
           </div>
         </div>

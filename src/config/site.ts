@@ -5,4 +5,5 @@ export const siteConfig = {
   phone: '+996XXXXXXXXX',
   workingHours: 'Ежедневно с 9:00 до 21:00',
   url: 'https://autokeys-bishkek.kg',
+  address: 'Проспект Дэн Сяопина, 457к',
 } as const;
