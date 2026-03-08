@@ -34,11 +34,11 @@ export function Hero() {
       </video>
 
       {/* Лёгкий градиент + «сеточка», чтобы видео оставалось заметным */}
-      <div className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-b from-black/40 via-black/55 to-black/80" />
-      <div className="pointer-events-none absolute inset-0 z-0 opacity-20 mix-blend-soft-light [background-image:radial-gradient(circle_at_1px_1px,#1f2937_1px,transparent_0)] [background-size:32px_32px]" />
+      {/* <div className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-b from-black/40 via-black/55 to-black/80" />
+      <div className="pointer-events-none absolute inset-0 z-0 opacity-20 mix-blend-soft-light [background-image:radial-gradient(circle_at_1px_1px,#1f2937_1px,transparent_0)] [background-size:32px_32px]" /> */}
 
       <Container className="relative z-10 flex h-screen items-center justify-center px-4">
-        <div className="max-w-4xl mx-auto text-center rounded-[32px] border border-slate-700/40 bg-slate-900/45 px-6 py-10 md:px-10 md:py-12 backdrop-blur-xl shadow-[0_0_60px_rgba(15,23,42,0.7)]">
+        <div className="max-w-4xl mx-auto text-center rounded-[32px] md:border border-slate-700/40 bg-transparent md:bg-slate-900/45 px-6 py-10 md:px-10 md:py-12 md:backdrop-blur-xl">
           <div className="flex flex-wrap justify-center gap-3 mb-8">
             <HeroBadge icon={MapPin} text={siteConfig.city} />
             <HeroBadge icon={Clock} text="Срочно / в день обращения" />

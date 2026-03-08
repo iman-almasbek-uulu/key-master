@@ -16,8 +16,9 @@
   body {
     @apply bg-slate-950 text-slate-100 antialiased;
     background-image: url("https://wallpaper.forfun.com/fetch/aa/aae0b5e796321474dbe7cb2aa5f23edb.jpeg");
+    background-position: center;
     background-attachment: fixed;
-    background-size: contain;
+    background-size: cover;
     min-height: 100vh;
   }
 

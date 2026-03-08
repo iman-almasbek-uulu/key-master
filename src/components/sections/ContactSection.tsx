@@ -1,4 +1,4 @@
-import { MapPin, Clock, MessageCircle, Send, ExternalLink } from "lucide-react";
+import { MapPin, Clock, MessageCircle, Send, ExternalLink, Phone } from "lucide-react";
 import { Container } from "@/src/components/ui/container";
 import { Section } from "@/src/components/ui/section";
 import { CustomButton } from "@/src/components/ui/custom-button";
@@ -22,6 +22,14 @@ function ContactInfo() {
             <p className="text-slate-300">{siteConfig.address}</p>
             <p className="text-slate-400 text-sm mt-1">
               {siteConfig.city}
+            </p>
+          </div>
+          <Phone size={24} className="text-slate-400 flex-shrink-0 mt-1" />
+          <div>
+            <h3 className="text-white font-semibold mb-1">Телефон</h3>
+            <p className="text-slate-300">{siteConfig.phone}</p>
+            <p className="text-slate-400 text-sm mt-1">
+              {siteConfig.phone}
             </p>
           </div>
         </div>  
@@ -81,10 +89,10 @@ export function ContactSection() {
       className="bg-gradient-to-b from-slate-950 via-emerald-950 to-slate-950"
     >
       <Container>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           <ContactInfo />
 
-          <div className="relative bg-slate-950/70 border border-slate-800/80 rounded-2xl overflow-hidden h-[400px] lg:h-auto shadow-[0_18px_40px_rgba(15,23,42,0.7)]">
+          <div className="relative flex justify-center items-center bg-slate-950/70 border border-slate-800/80 rounded-2xl overflow-hidden h-[400px] lg:h-auto shadow-[0_18px_40px_rgba(15,23,42,0.7)]">
             <div className="pointer-events-none absolute top-4 left-4 z-10 inline-flex items-center gap-2 rounded-full bg-black/70 px-3 py-1 text-xs text-slate-100 border border-slate-700/80">
               <MapPin size={14} className="text-red-400" />
               <span>Мы здесь</span>
