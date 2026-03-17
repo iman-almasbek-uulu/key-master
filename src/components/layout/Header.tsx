@@ -9,7 +9,7 @@ export function Header() {
     <header className="sticky top-0 z-50 bg-transparent backdrop-blur-md border-b border-white/10">
       {" "}
       <Container>
-        <div className="flex gap-10 items-center justify-between py-2">
+        <div className="flex gap-6 md:gap-10 items-center justify-between py-2">
           <div className="flex items-center gap-3 max-w-xs max-h-16">
             <img
               src={logo.src}

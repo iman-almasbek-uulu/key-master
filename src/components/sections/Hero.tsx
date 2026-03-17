@@ -1,80 +1,92 @@
-import { MessageCircle, Send, MapPin, Clock, Package } from "lucide-react";
 import { Container } from "@/src/components/ui/container";
 import { CustomButton } from "@/src/components/ui/custom-button";
 import { siteConfig } from "@/src/config/site";
-import { socialLinks } from "@/src/config/links";
-
-function HeroBadge({
-  icon: Icon,
-  text,
-}: {
-  icon: typeof MapPin;
-  text: string;
-}) {
-  return (
-    <div className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm text-slate-100/90 border border-cyan-400/40 bg-slate-900/60 backdrop-blur-md shadow-[0_0_25px_rgba(34,211,238,0.25)]">
-      <Icon size={16} className="text-cyan-300" />
-      <span>{text}</span>
-    </div>
-  );
-}
+import { ChevronRight, Clock, Key, Phone } from "lucide-react";
 
 export function Hero() {
   return (
-    <section className="relative h-screen overflow-hidden bg-black">
-      <video
-        autoPlay
-        muted
-        playsInline
-        poster="/fallback-image.jpg" // Картинка, пока видео грузится
-        className="absolute inset-0 z-0 h-full w-full object-cover"
-      >
-        <source src="/images/car.mp4" type="video/mp4" />
-        Ваш браузер не поддерживает видео.
-      </video>
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-black via-zinc-950 to-black" />
+      <div className="absolute inset-0 grid-pattern" />
+      <div className="absolute inset-0 diagonal-lines" />
 
-      {/* Лёгкий градиент + «сеточка», чтобы видео оставалось заметным */}
-      {/* <div className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-b from-black/40 via-black/55 to-black/80" />
-      <div className="pointer-events-none absolute inset-0 z-0 opacity-20 mix-blend-soft-light [background-image:radial-gradient(circle_at_1px_1px,#1f2937_1px,transparent_0)] [background-size:32px_32px]" /> */}
+      {/* Decorative elements */}
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-sky-500/10 rounded-full blur-3xl" />
+      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl" />
 
-      <Container className="relative z-10 flex h-screen items-center justify-center px-4">
-        <div className="max-w-4xl mx-auto text-center rounded-[32px] md:border border-slate-700/40 bg-transparent md:bg-slate-900/45 px-6 py-10 md:px-10 md:py-12 md:backdrop-blur-xl">
-          <div className="flex flex-wrap justify-center gap-3 mb-8">
-            <HeroBadge icon={MapPin} text={siteConfig.city} />
-            <HeroBadge icon={Clock} text="Срочно / в день обращения" />
-            <HeroBadge icon={Package} text="Большой ассортимент" />
+      {/* Key icon decoration */}
+      <div className="absolute top-16 right-6 sm:right-10 lg:right-20 opacity-[0.06]">
+        <Key className="w-[240px] h-[240px] sm:w-[320px] sm:h-[320px] lg:w-[420px] lg:h-[420px] rotate-45" />
+      </div>
+
+      <Container className="relative z-10 py-24 sm:py-28 lg:py-32">
+        <div className="text-center">
+          <div className="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full border border-sky-500/30 text-sky-300 bg-sky-500/5">
+            <Clock className="w-4 h-4" />
+            <span className="text-sm font-medium">Срочно / в день обращения</span>
           </div>
 
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-white mb-6 leading-tight drop-shadow-[0_0_35px_rgba(8,47,73,0.85)]">
-            {siteConfig.name}
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+            <span className="text-gradient">{siteConfig.name}</span>
+            <br />
+            <span className="text-white">Ремонт и изготовление ключей</span>
           </h1>
 
-          <p className="text-base md:text-lg text-slate-200/90 mb-10 leading-relaxed max-w-2xl mx-auto">
+          <p className="text-lg sm:text-xl text-zinc-400 max-w-3xl mx-auto mb-10 leading-relaxed">
             {siteConfig.description}
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-14">
             <CustomButton
-              variant="primary"
               size="lg"
-              href={socialLinks.whatsapp}
-              className="relative bg-[#25D366] text-white font-semibold hover:bg-[#1ebe5a] border border-[#1ebe5a]/70 transition-colors duration-200 group"
+              className="group bg-sky-500 hover:bg-sky-400 text-slate-950 focus:ring-sky-400 border border-sky-300/30"
+              href={`tel:${siteConfig.phone}`}
             >
-              <MessageCircle size={20} className="mr-2" />
-              Написать в WhatsApp
+              <Phone className="w-5 h-5 mr-2" />
+              Позвонить
+              <ChevronRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
             </CustomButton>
             <CustomButton
+              size="lg"
               variant="outline"
-              size="lg"
-              className="border-[#229ED9]/80 bg-[#229ED9] text-white hover:bg-[#1b8ec4] hover:border-[#1b8ec4]/90 hover:text-white transition-colors duration-200 group"
-              href={socialLinks.telegram}
+              className="border-zinc-700 text-zinc-200 hover:bg-zinc-900/60"
+              href="#services"
             >
-              <Send size={20} className="mr-2" />
-              Написать в Telegram
+              Узнать услуги
             </CustomButton>
+          </div>
+
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
+            {[
+              { value: "15", label: "минут выезд", suffix: "мин" },
+              { value: "10", label: "лет опыта", suffix: "+" },
+              { value: "5000", label: "довольных клиентов", suffix: "+" },
+              { value: "24/7", label: "режим работы", suffix: "" },
+            ].map((stat) => (
+              <div
+                key={stat.label}
+                className="p-5 sm:p-6 rounded-2xl bg-zinc-900/50 border border-zinc-800 hover:border-sky-500/30 transition-colors"
+              >
+                <div className="text-3xl lg:text-4xl font-bold text-gradient">
+                  {stat.value}
+                  {stat.suffix}
+                </div>
+                <div className="text-xs sm:text-sm text-zinc-500 mt-1 uppercase tracking-wider">
+                  {stat.label}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </Container>
+
+      {/* Scroll indicator */}
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
+        <div className="w-6 h-10 rounded-full border-2 border-zinc-600 flex items-start justify-center p-2">
+          <div className="w-1 h-2 bg-sky-500 rounded-full" />
+        </div>
+      </div>
     </section>
   );
 }
