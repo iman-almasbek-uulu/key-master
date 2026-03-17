@@ -1,27 +1,27 @@
-import { Container } from "@/src/components/ui/container";
-import { Section } from "@/src/components/ui/section";
+import { Container } from '@/src/components/ui/container'
+import { Section } from '@/src/components/ui/section'
 
 const brands = [
-  "Toyota",
-  "Honda",
-  "BMW",
-  "Mercedes-Benz",
-  "Kia",
-  "Hyundai",
-  "Nissan",
-  "Volkswagen",
-  "Audi",
-  "Lexus",
-  "Mazda",
-  "Subaru",
-];
+  'Toyota',
+  'Honda',
+  'BMW',
+  'Mercedes-Benz',
+  'Kia',
+  'Hyundai',
+  'Nissan',
+  'Volkswagen',
+  'Audi',
+  'Lexus',
+  'Mazda',
+  'Subaru',
+]
 
 function BrandBadge({ name }: { name: string }) {
   return (
     <div className="rounded-xl border border-slate-800/80 bg-slate-950/70 px-6 py-3 text-slate-100/90 font-medium hover:border-cyan-500/60 hover:text-cyan-100 transition-colors duration-200">
       {name}
     </div>
-  );
+  )
 }
 
 export function BrandsSection() {
@@ -42,7 +42,10 @@ export function BrandsSection() {
 
         <div className="flex flex-wrap justify-center gap-4">
           {brands.map((brand) => (
-            <BrandBadge key={brand} name={brand} />
+            <BrandBadge
+              key={brand}
+              name={brand}
+            />
           ))}
         </div>
 
@@ -53,5 +56,5 @@ export function BrandsSection() {
         </div>
       </Container>
     </Section>
-  );
+  )
 }

@@ -1,9 +1,9 @@
-import { Container } from "@/src/components/ui/container";
-import { SocialLinks } from "@/src/components/ui/social-links";
-import { siteConfig } from "@/src/config/site";
+import { Container } from '@/src/components/ui/container'
+import { SocialLinks } from '@/src/components/ui/social-links'
+import { siteConfig } from '@/src/config/site'
 
 export function Footer() {
-  const currentYear = new Date().getFullYear();
+  const currentYear = new Date().getFullYear()
 
   return (
     <footer className="bg-slate-900 border-t border-slate-800 py-12">
@@ -19,5 +19,5 @@ export function Footer() {
         </div>
       </Container>
     </footer>
-  );
+  )
 }

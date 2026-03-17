@@ -15,7 +15,7 @@
 
   body {
     @apply bg-slate-950 text-slate-100 antialiased;
-    background-image: url("https://wallpaper.forfun.com/fetch/aa/aae0b5e796321474dbe7cb2aa5f23edb.jpeg");
+    background-image: url('https://wallpaper.forfun.com/fetch/aa/aae0b5e796321474dbe7cb2aa5f23edb.jpeg');
     background-position: center;
     background-attachment: fixed;
     background-size: cover;
@@ -46,7 +46,11 @@
   }
 
   .grid-pattern {
-    background-image: radial-gradient(circle at 1px 1px, rgba(161, 161, 170, 0.35) 1px, transparent 0);
+    background-image: radial-gradient(
+      circle at 1px 1px,
+      rgba(161, 161, 170, 0.35) 1px,
+      transparent 0
+    );
     background-size: 36px 36px;
     opacity: 0.12;
     mix-blend-mode: overlay;

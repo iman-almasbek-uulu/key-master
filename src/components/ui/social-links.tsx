@@ -1,12 +1,16 @@
-import { Instagram, MessageCircle, Send } from 'lucide-react';
-import { socialLinks } from '@/src/config/links';
+import { Instagram, MessageCircle, Send } from 'lucide-react'
+
+import { socialLinks } from '@/src/config/links'
 
 interface SocialLinksProps {
-  className?: string;
-  iconSize?: number;
+  className?: string
+  iconSize?: number
 }
 
-export function SocialLinks({ className = '', iconSize = 20 }: SocialLinksProps) {
+export function SocialLinks({
+  className = '',
+  iconSize = 20,
+}: SocialLinksProps) {
   return (
     <div className={`flex items-center gap-4 ${className}`}>
       <a
@@ -37,5 +41,5 @@ export function SocialLinks({ className = '', iconSize = 20 }: SocialLinksProps)
         <Send size={iconSize} />
       </a>
     </div>
-  );
+  )
 }

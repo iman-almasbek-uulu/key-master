@@ -1,13 +1,14 @@
-"use client";
+'use client'
 
-import { useState } from "react";
-import { ChevronDown } from "lucide-react";
-import { Container } from "@/src/components/ui/container";
-import { Section } from "@/src/components/ui/section";
-import { faqItems, type FaqItem } from "@/src/data/faq";
+import { useState } from 'react'
+import { ChevronDown } from 'lucide-react'
+
+import { Container } from '@/src/components/ui/container'
+import { Section } from '@/src/components/ui/section'
+import { type FaqItem, faqItems } from '@/src/data/faq'
 
 function FaqItem({ item }: { item: FaqItem }) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false)
 
   return (
     <div className="bg-slate-950/70 border border-slate-800/80 rounded-2xl overflow-hidden shadow-[0_18px_40px_rgba(15,23,42,0.7)]">
@@ -22,13 +23,13 @@ function FaqItem({ item }: { item: FaqItem }) {
         <ChevronDown
           size={24}
           className={`text-slate-400 flex-shrink-0 transition-transform duration-200 ${
-            isOpen ? "rotate-180" : ""
+            isOpen ? 'rotate-180' : ''
           }`}
         />
       </button>
       <div
         className={`overflow-hidden transition-all duration-200 ${
-          isOpen ? "max-h-96" : "max-h-0"
+          isOpen ? 'max-h-96' : 'max-h-0'
         }`}
       >
         <div className="px-6 pb-5 pt-0">
@@ -38,7 +39,7 @@ function FaqItem({ item }: { item: FaqItem }) {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
 export function FaqSection() {
@@ -59,10 +60,13 @@ export function FaqSection() {
 
         <div className="max-w-3xl mx-auto space-y-4">
           {faqItems.map((item) => (
-            <FaqItem key={item.id} item={item} />
+            <FaqItem
+              key={item.id}
+              item={item}
+            />
           ))}
         </div>
       </Container>
     </Section>
-  );
+  )
 }

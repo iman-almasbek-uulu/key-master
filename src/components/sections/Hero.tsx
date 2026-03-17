@@ -1,7 +1,8 @@
-import { Container } from "@/src/components/ui/container";
-import { CustomButton } from "@/src/components/ui/custom-button";
-import { siteConfig } from "@/src/config/site";
-import { ChevronRight, Clock, Key, Phone } from "lucide-react";
+import { ChevronRight, Clock, Key, Phone } from 'lucide-react'
+
+import { Container } from '@/src/components/ui/container'
+import { CustomButton } from '@/src/components/ui/custom-button'
+import { siteConfig } from '@/src/config/site'
 
 export function Hero() {
   return (
@@ -24,7 +25,9 @@ export function Hero() {
         <div className="text-center">
           <div className="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full border border-sky-500/30 text-sky-300 bg-sky-500/5">
             <Clock className="w-4 h-4" />
-            <span className="text-sm font-medium">Срочно / в день обращения</span>
+            <span className="text-sm font-medium">
+              Срочно / в день обращения
+            </span>
           </div>
 
           <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
@@ -59,10 +62,10 @@ export function Hero() {
 
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
             {[
-              { value: "15", label: "минут выезд", suffix: "мин" },
-              { value: "10", label: "лет опыта", suffix: "+" },
-              { value: "5000", label: "довольных клиентов", suffix: "+" },
-              { value: "24/7", label: "режим работы", suffix: "" },
+              { value: '15', label: 'минут выезд', suffix: 'мин' },
+              { value: '10', label: 'лет опыта', suffix: '+' },
+              { value: '5000', label: 'довольных клиентов', suffix: '+' },
+              { value: '24/7', label: 'режим работы', suffix: '' },
             ].map((stat) => (
               <div
                 key={stat.label}
@@ -88,5 +91,5 @@ export function Hero() {
         </div>
       </div>
     </section>
-  );
+  )
 }
