@@ -9,7 +9,10 @@ export function Hero() {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background */}
       <picture className="absolute inset-0">
-        <source media="(max-width: 639px)" srcSet="images/hero-locksmith-mobile.png" />
+        <source
+          media="(max-width: 639px)"
+          srcSet="images/hero-locksmith-mobile-v2.png"
+        />
         <img
           src="images/hero-locksmith.png"
           alt=""
