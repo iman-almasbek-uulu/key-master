@@ -66,8 +66,8 @@ export function WhyUsSection() {
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-slate-950/90 via-cyan-950/70 to-slate-950/95" />
       <div className="pointer-events-none absolute inset-0 opacity-25 mix-blend-soft-light [background-image:radial-gradient(circle_at_1px_1px,#1f2937_1px,transparent_0)] [background-size:32px_32px]" />
 
-      <Container>
-        <div className="relative text-center mb-12 space-y-3">
+      <Container className="relative z-10">
+        <div className="text-center mb-12 space-y-3">
           <h2 className="text-3xl md:text-4xl font-semibold text-white tracking-tight">
             Почему выбирают нас
           </h2>
