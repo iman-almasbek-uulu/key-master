@@ -8,10 +8,14 @@ export function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background */}
-      <div
-        className="absolute inset-0 bg-cover bg-center brightness-150 contrast-125"
-        style={{ backgroundImage: "url('images/hero-locksmith.png')" }}
-      />
+      <picture className="absolute inset-0">
+        <source media="(max-width: 639px)" srcSet="images/hero-locksmith-mobile.png" />
+        <img
+          src="images/hero-locksmith.png"
+          alt=""
+          className="h-full w-full object-cover object-center brightness-150 contrast-125"
+        />
+      </picture>
       <div className="absolute inset-0 bg-gradient-to-r from-slate-950/20 via-transparent to-slate-950/20" />
       <div className="absolute inset-0 grid-pattern" />
       <div className="absolute inset-0 diagonal-lines" />
