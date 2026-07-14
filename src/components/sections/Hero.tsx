@@ -16,7 +16,7 @@ export function Hero() {
         <img
           src="images/hero-locksmith.png"
           alt=""
-          className="h-full w-full object-cover object-center brightness-150 contrast-125"
+          className="h-full w-full object-cover object-center brightness-150 contrast-125 max-sm:scale-110 max-sm:-translate-y-72"
         />
       </picture>
       <div className="absolute inset-0 bg-gradient-to-r from-slate-950/20 via-transparent to-slate-950/20" />
