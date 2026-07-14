@@ -28,20 +28,53 @@ export function Hero() {
           .from('[data-hero-item="actions"]', { autoAlpha: 0, y: 18, duration: 0.5 }, '-=0.3')
           .from('[data-hero-item="stats"]', { autoAlpha: 0, y: 18, duration: 0.5 }, '-=0.2')
 
+        // Постоянные движения намеренно заметны: посетитель видит «живой» сайт
+        // даже после того, как короткая стартовая анимация уже закончилась.
         gsap.to('[data-hero-glow="left"]', {
-          x: 28,
-          y: -18,
-          scale: 1.12,
-          duration: 4.5,
+          x: 42,
+          y: -30,
+          scale: 1.22,
+          duration: 3.8,
           ease: 'sine.inOut',
           repeat: -1,
           yoyo: true,
         })
         gsap.to('[data-hero-glow="right"]', {
-          x: -22,
-          y: 16,
-          scale: 1.08,
-          duration: 5.25,
+          x: -36,
+          y: 26,
+          scale: 1.18,
+          duration: 4.6,
+          ease: 'sine.inOut',
+          repeat: -1,
+          yoyo: true,
+        })
+        gsap.to('[data-hero-key]', {
+          rotation: '+=12',
+          y: -12,
+          duration: 3.2,
+          ease: 'sine.inOut',
+          repeat: -1,
+          yoyo: true,
+        })
+        gsap.to('[data-hero-cta]', {
+          y: -3,
+          scale: 1.045,
+          duration: 1.05,
+          ease: 'sine.inOut',
+          repeat: -1,
+          yoyo: true,
+        })
+        gsap.to('[data-hero-item="stat"]', {
+          y: -8,
+          duration: 1.35,
+          ease: 'sine.inOut',
+          stagger: { each: 0.22, repeat: -1, yoyo: true },
+          repeat: -1,
+          yoyo: true,
+        })
+        gsap.to('[data-hero-scroll]', {
+          y: 10,
+          duration: 0.85,
           ease: 'sine.inOut',
           repeat: -1,
           yoyo: true,
@@ -79,7 +112,10 @@ export function Hero() {
         className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl will-change-transform"
       />
 
-      <div className="absolute top-16 right-6 sm:right-10 lg:right-20 opacity-[0.06]">
+      <div
+        data-hero-key
+        className="absolute top-16 right-6 sm:right-10 lg:right-20 opacity-[0.12] will-change-transform"
+      >
         <Key className="w-[240px] h-[240px] sm:w-[320px] sm:h-[320px] lg:w-[420px] lg:h-[420px] rotate-45" />
       </div>
 
@@ -113,15 +149,17 @@ export function Hero() {
             data-hero-item="actions"
             className="flex flex-col sm:flex-row gap-4 justify-center mb-14"
           >
-            <CustomButton
-              size="lg"
-              className="group bg-sky-500 hover:bg-sky-400 text-slate-950 focus:ring-sky-400 border border-sky-300/30"
-              href={`tel:${siteConfig.phone}`}
-            >
-              <Phone className="w-5 h-5 mr-2" />
-              Позвонить
-              <ChevronRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-            </CustomButton>
+            <div data-hero-cta className="will-change-transform">
+              <CustomButton
+                size="lg"
+                className="group bg-sky-500 hover:bg-sky-400 text-slate-950 focus:ring-sky-400 border border-sky-300/30"
+                href={`tel:${siteConfig.phone}`}
+              >
+                <Phone className="w-5 h-5 mr-2" />
+                Позвонить
+                <ChevronRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+              </CustomButton>
+            </div>
             <CustomButton
               size="lg"
               variant="outline"
@@ -160,7 +198,7 @@ export function Hero() {
         </div>
       </Container>
 
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
+      <div data-hero-scroll className="absolute bottom-10 left-1/2 -translate-x-1/2 will-change-transform">
         <div className="w-6 h-10 rounded-full border-2 border-zinc-600 flex items-start justify-center p-2">
           <div className="w-1 h-2 bg-sky-500 rounded-full" />
         </div>
