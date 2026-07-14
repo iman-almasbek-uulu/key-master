@@ -11,12 +11,12 @@ export function Hero() {
       <picture className="absolute inset-0">
         <source
           media="(max-width: 639px)"
-          srcSet="images/hero-locksmith-mobile-visible.png"
+          srcSet="images/hero-locksmith-mobile-v2.png"
         />
         <img
           src="images/hero-locksmith.png"
           alt=""
-          className="h-full w-full object-cover object-center brightness-150 contrast-125"
+          className="h-full w-full object-cover object-center brightness-150 contrast-125 max-sm:object-contain max-sm:object-top"
         />
       </picture>
       <div className="absolute inset-0 bg-gradient-to-r from-slate-950/20 via-transparent to-slate-950/20" />
