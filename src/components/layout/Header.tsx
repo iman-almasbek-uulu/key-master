@@ -11,20 +11,12 @@ export function Header() {
       {' '}
       <Container>
         <div className="flex gap-6 md:gap-10 items-center justify-between py-2">
-          <div className="flex items-center gap-3 max-w-xs max-h-16">
+          <div className="flex items-center">
             <img
               src={logo.src}
-              className="sm:max-w-[100px] max-w-[50px]"
-              alt=""
+              className="h-12 w-12 sm:h-14 sm:w-14 object-contain"
+              alt="Логотип Автоключи Бишкек"
             />
-            <div className="flex flex-col leading-none text-[16px] sm:text-[22px] font-semibold tracking-tight font-[cursive] italic">
-              <span className="text-white drop-shadow-[0_0_8px_rgba(15,23,42,0.9)]">
-                Чип
-              </span>{' '}
-              <span className="text-blue-400 drop-shadow-[0_0_10px_rgba(37,99,235,0.9)]">
-                ключ
-              </span>
-            </div>
           </div>
 
           <div className="flex items-center gap-4">
