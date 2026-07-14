@@ -1,6 +1,7 @@
 import { DollarSign, MapPin, Package, Zap } from 'lucide-react'
 
 import { Container } from '@/src/components/ui/container'
+import { Reveal } from '@/src/components/ui/reveal'
 import { Section } from '@/src/components/ui/section'
 
 interface Advantage {
@@ -36,7 +37,7 @@ function AdvantageCard({ advantage }: { advantage: Advantage }) {
   const Icon = advantage.icon
 
   return (
-    <div className="group rounded-2xl border border-cyan-400/60 bg-black text-white p-6 shadow-[0_18px_40px_rgba(0,0,0,0.9)] hover:border-cyan-300/90 hover:shadow-[0_22px_50px_rgba(8,47,73,0.95)] transition-all duration-300">
+    <div className="group rounded-2xl border border-cyan-400/60 bg-black text-white p-6 shadow-[0_18px_40px_rgba(0,0,0,0.9)] hover:-translate-y-1 hover:border-cyan-300/90 hover:shadow-[0_22px_50px_rgba(8,47,73,0.95)] transition-all duration-300">
       <div className="flex items-start gap-4">
         <div className="bg-slate-900 p-3 rounded-xl flex-shrink-0">
           <Icon
@@ -67,21 +68,23 @@ export function WhyUsSection() {
       <div className="pointer-events-none absolute inset-0 opacity-25 mix-blend-soft-light [background-image:radial-gradient(circle_at_1px_1px,#1f2937_1px,transparent_0)] [background-size:32px_32px]" />
 
       <Container className="relative z-10">
-        <div className="text-center mb-12 space-y-3">
+        <Reveal className="text-center mb-12 space-y-3">
           <h2 className="text-3xl md:text-4xl font-semibold text-white tracking-tight">
             Почему выбирают нас
           </h2>
           <p className="text-slate-400 text-base md:text-lg max-w-2xl mx-auto">
             Преимущества работы с нашим сервисом
           </p>
-        </div>
+        </Reveal>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
           {advantages.map((advantage, index) => (
-            <AdvantageCard
-              key={index}
-              advantage={advantage}
-            />
+            <Reveal
+              key={advantage.title}
+              delay={index * 100}
+            >
+              <AdvantageCard advantage={advantage} />
+            </Reveal>
           ))}
         </div>
       </Container>

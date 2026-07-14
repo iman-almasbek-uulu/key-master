@@ -24,8 +24,8 @@ export function Hero() {
       <div className="absolute inset-0 diagonal-lines" />
 
       {/* Decorative elements */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-sky-500/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl" />
+      <div className="hero-glow absolute top-1/4 left-1/4 w-96 h-96 bg-sky-500/10 rounded-full blur-3xl" />
+      <div className="hero-glow absolute bottom-1/4 right-1/4 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl [animation-delay:-4s]" />
 
       {/* Key icon decoration */}
       <div className="absolute top-16 right-6 sm:right-10 lg:right-20 opacity-[0.06]">
@@ -34,24 +34,24 @@ export function Hero() {
 
       <Container className="relative z-10 py-24 sm:py-28 lg:py-32">
         <div className="text-center">
-          <div className="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full border border-sky-500/30 text-sky-300 bg-sky-500/5">
+          <div className="hero-enter inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full border border-sky-500/30 text-sky-300 bg-sky-500/5">
             <Clock className="w-4 h-4" />
             <span className="text-sm font-medium">
               Срочно / в день обращения
             </span>
           </div>
 
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+          <h1 className="hero-enter hero-enter-delay-1 text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
             <span className="text-gradient">{siteConfig.name}</span>
             <br />
             <span className="text-white">Ремонт и изготовление ключей</span>
           </h1>
 
-          <p className="text-lg sm:text-xl text-zinc-400 max-w-3xl mx-auto mb-10 leading-relaxed">
+          <p className="hero-enter hero-enter-delay-2 text-lg sm:text-xl text-zinc-400 max-w-3xl mx-auto mb-10 leading-relaxed">
             {siteConfig.description}
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-14">
+          <div className="hero-enter hero-enter-delay-2 flex flex-col sm:flex-row gap-4 justify-center mb-14">
             <CustomButton
               size="lg"
               className="group bg-sky-500 hover:bg-sky-400 text-slate-950 focus:ring-sky-400 border border-sky-300/30"
@@ -80,7 +80,7 @@ export function Hero() {
             ].map((stat) => (
               <div
                 key={stat.label}
-                className="p-5 sm:p-6 rounded-2xl bg-zinc-900/50 border border-zinc-800 hover:border-sky-500/30 transition-colors"
+                className="hero-enter hero-enter-delay-2 p-5 sm:p-6 rounded-2xl bg-zinc-900/50 border border-zinc-800 hover:border-sky-500/30 hover:-translate-y-1 transition-all duration-300"
               >
                 <div className="text-3xl lg:text-4xl font-bold text-gradient">
                   {stat.value}

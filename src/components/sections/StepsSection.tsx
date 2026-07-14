@@ -1,6 +1,7 @@
 import { CheckCircle, DollarSign, MessageSquare, Search } from 'lucide-react'
 
 import { Container } from '@/src/components/ui/container'
+import { Reveal } from '@/src/components/ui/reveal'
 import { Section } from '@/src/components/ui/section'
 
 interface Step {
@@ -42,7 +43,7 @@ function StepCard({ step }: { step: Step }) {
 
   return (
     <div className="relative group">
-      <div className="flex flex-col items-center text-center gap-3 rounded-2xl border border-slate-800/80 bg-slate-950/70 px-5 py-6 shadow-[0_18px_40px_rgba(15,23,42,0.7)]">
+      <div className="flex flex-col items-center text-center gap-3 rounded-2xl border border-slate-800/80 bg-slate-950/70 px-5 py-6 shadow-[0_18px_40px_rgba(15,23,42,0.7)] hover:-translate-y-1 hover:border-cyan-500/50 transition-all duration-300">
         <div className="relative mb-2">
           <div className="bg-slate-900/90 px-4 py-3 rounded-full">
             <Icon
@@ -70,21 +71,23 @@ export function StepsSection() {
       className="bg-gradient-to-b from-slate-950 via-violet-950 to-slate-950"
     >
       <Container>
-        <div className="text-center mb-12 space-y-3">
+        <Reveal className="text-center mb-12 space-y-3">
           <h2 className="text-3xl md:text-4xl font-semibold text-white tracking-tight">
             Как мы работаем
           </h2>
           <p className="text-slate-400 text-base md:text-lg max-w-2xl mx-auto">
             Простой процесс от заявки до готового ключа
           </p>
-        </div>
+        </Reveal>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {steps.map((step) => (
-            <StepCard
+          {steps.map((step, index) => (
+            <Reveal
               key={step.number}
-              step={step}
-            />
+              delay={index * 100}
+            >
+              <StepCard step={step} />
+            </Reveal>
           ))}
         </div>
       </Container>
