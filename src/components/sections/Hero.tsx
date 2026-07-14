@@ -1,4 +1,4 @@
-import { ChevronRight, Clock, Key, Phone } from 'lucide-react'
+import { ChevronRight, Clock, Phone } from 'lucide-react'
 
 import { Container } from '@/src/components/ui/container'
 import { CustomButton } from '@/src/components/ui/custom-button'
@@ -6,7 +6,7 @@ import { siteConfig } from '@/src/config/site'
 
 export function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#020713]">
       {/* Background */}
       <picture className="absolute inset-0">
         <source
@@ -16,7 +16,7 @@ export function Hero() {
         <img
           src="images/hero-locksmith.png"
           alt=""
-          className="h-full w-full object-cover object-center brightness-150 contrast-125 max-sm:object-contain max-sm:object-top"
+          className="h-full w-full object-cover object-center brightness-150 contrast-125 max-sm:object-contain max-sm:object-top max-sm:opacity-75"
         />
       </picture>
       <div className="absolute inset-0 bg-gradient-to-r from-slate-950/20 via-transparent to-slate-950/20" />
@@ -27,31 +27,26 @@ export function Hero() {
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-sky-500/10 rounded-full blur-3xl" />
       <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl" />
 
-      {/* Key icon decoration */}
-      <div className="absolute top-16 right-6 sm:right-10 lg:right-20 opacity-[0.06]">
-        <Key className="w-[240px] h-[240px] sm:w-[320px] sm:h-[320px] lg:w-[420px] lg:h-[420px] rotate-45" />
-      </div>
-
-      <Container className="relative z-10 py-24 sm:py-28 lg:py-32">
+      <Container className="relative z-10 py-16 sm:py-28 lg:py-32">
         <div className="text-center">
-          <div className="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full border border-sky-500/30 text-sky-300 bg-sky-500/5">
+          <div className="inline-flex items-center gap-2 mb-5 sm:mb-6 px-4 py-2 rounded-full border border-sky-500/30 text-sky-300 bg-sky-500/10 backdrop-blur-sm">
             <Clock className="w-4 h-4" />
             <span className="text-sm font-medium">
               Срочно / в день обращения
             </span>
           </div>
 
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold mb-4 sm:mb-6 leading-[1.08] sm:leading-tight tracking-tight">
             <span className="text-gradient">{siteConfig.name}</span>
             <br />
             <span className="text-white">Ремонт и изготовление ключей</span>
           </h1>
 
-          <p className="text-lg sm:text-xl text-zinc-400 max-w-3xl mx-auto mb-10 leading-relaxed">
+          <p className="text-base sm:text-xl text-zinc-300 max-w-3xl mx-auto mb-8 sm:mb-10 leading-relaxed max-sm:rounded-xl max-sm:bg-slate-950/75 max-sm:px-3 max-sm:py-2 max-sm:backdrop-blur-sm">
             {siteConfig.description}
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-14">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-10 sm:mb-14">
             <CustomButton
               size="lg"
               className="group bg-sky-500 hover:bg-sky-400 text-slate-950 focus:ring-sky-400 border border-sky-300/30"
