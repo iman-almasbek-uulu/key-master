@@ -17,10 +17,12 @@ export function Reveal({
   return (
     <div
       className={cn('motion-reveal', className)}
-      style={{
-        ...style,
-        '--reveal-delay': `${delay}ms`,
-      } as CSSProperties}
+      style={
+        {
+          ...style,
+          '--reveal-delay': `${delay}ms`,
+        } as CSSProperties
+      }
       {...props}
     >
       {children}
