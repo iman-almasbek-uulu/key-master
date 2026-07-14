@@ -65,7 +65,7 @@ export function Hero() {
               { value: '15', label: 'минут выезд', suffix: 'мин' },
               { value: '10', label: 'лет опыта', suffix: '+' },
               { value: '5000', label: 'довольных клиентов', suffix: '+' },
-              { value: '24/7', label: 'режим работы', suffix: '' },
+              { value: '9:00–21:00', label: 'режим работы', suffix: '' },
             ].map((stat) => (
               <div
                 key={stat.label}

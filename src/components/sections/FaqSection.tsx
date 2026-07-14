@@ -1,7 +1,8 @@
 'use client'
 
-import { useState } from 'react'
 import { ChevronDown } from 'lucide-react'
+
+import { useState } from 'react'
 
 import { Container } from '@/src/components/ui/container'
 import { Section } from '@/src/components/ui/section'

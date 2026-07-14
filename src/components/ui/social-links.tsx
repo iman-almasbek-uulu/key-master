@@ -1,4 +1,4 @@
-import { Instagram, MessageCircle, Send } from 'lucide-react'
+import { MessageCircle, Send } from 'lucide-react'
 
 import { socialLinks } from '@/src/config/links'
 
@@ -13,15 +13,6 @@ export function SocialLinks({
 }: SocialLinksProps) {
   return (
     <div className={`flex items-center gap-4 ${className}`}>
-      <a
-        href={socialLinks.instagram}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-slate-400 hover:text-slate-200 transition-colors duration-200"
-        aria-label="Instagram"
-      >
-        <Instagram size={iconSize} />
-      </a>
       <a
         href={socialLinks.whatsapp}
         target="_blank"

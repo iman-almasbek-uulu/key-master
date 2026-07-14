@@ -79,19 +79,6 @@ function ContactInfo() {
           />
           Открыть в Google Maps
         </CustomButton>
-
-        <CustomButton
-          variant="secondary"
-          size="sm"
-          href={socialLinks.twoGis}
-          className="w-full sm:w-auto ml-0 sm:ml-3"
-        >
-          <ExternalLink
-            size={16}
-            className="mr-2"
-          />
-          Открыть в 2GIS
-        </CustomButton>
       </div>
     </div>
   )

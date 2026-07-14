@@ -5,6 +5,6 @@ export const siteConfig = {
   city: 'Бишкек',
   phone: '+996704499678',
   workingHours: 'Ежедневно с 9:00 до 21:00',
-  url: 'https://autokeys-bishkek.kg',
+  url: 'https://iman-almasbek-uulu.github.io/key-master/',
   address: 'Проспект Дэн Сяопина, 457к',
 } as const

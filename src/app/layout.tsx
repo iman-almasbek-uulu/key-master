@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     images: [
       {
-        url: '@/public/logo2.png',
+        url: '/images/logo.png',
         width: 1200,
         height: 630,
         alt: `Логотип ${siteConfig.name}`,
@@ -61,7 +61,7 @@ const jsonLd = {
     addressCountry: 'KG',
   },
   openingHours: 'Mo-Su 09:00-21:00',
-  sameAs: [socialLinks.instagram, socialLinks.whatsapp, socialLinks.telegram],
+  sameAs: [socialLinks.whatsapp, socialLinks.telegram],
   priceRange: '$$',
 }
 

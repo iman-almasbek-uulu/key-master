@@ -5,7 +5,6 @@ import prettierConfig from 'eslint-config-prettier'
 import importPlugin from 'eslint-plugin-import'
 import react from 'eslint-plugin-react'
 import reactHooks from 'eslint-plugin-react-hooks'
-import simpleImportSort from 'eslint-plugin-simple-import-sort'
 import globals from 'globals'
 import tseslint from 'typescript-eslint'
 
@@ -35,27 +34,9 @@ export default [
       'react-hooks': reactHooks,
       '@typescript-eslint': tsPlugin,
       import: importPlugin,
-      'simple-import-sort': simpleImportSort,
     },
     rules: {
       ...prettierConfig.rules,
-      'simple-import-sort/imports': [
-        'error',
-        {
-          groups: [
-            ['^react', '^@?\\w'],
-            ['^antd', '^lodash'],
-            ['^@/components'],
-            ['^@/common'],
-            ['^@/services'],
-            ['^@/utils'],
-            ['^\\.\\./', '^\\./'],
-            ['^.+\\.module\\.(scss|css)$'],
-          ],
-        },
-      ],
-      'simple-import-sort/exports': 'error',
-
       // React
       'react/display-name': 'off',
       'react/jsx-key': 'error',

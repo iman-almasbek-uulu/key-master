@@ -1,0 +1,8 @@
+overrides:
+  postcss: 8.5.19
+
+allowBuilds:
+  sharp: false
+  unrs-resolver: true
+minimumReleaseAgeExclude:
+  - postcss@8.5.19
