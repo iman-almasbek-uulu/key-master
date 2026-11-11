@@ -1,91 +1,44 @@
-import { DollarSign, MapPin, Package, Zap } from 'lucide-react'
+import { Cpu, KeyRound, MapPin, Wrench } from 'lucide-react'
 
 import { Container } from '@/src/components/ui/container'
 import { Reveal } from '@/src/components/ui/reveal'
 import { Section } from '@/src/components/ui/section'
+import { getCopy, type Locale } from '@/src/i18n/site-copy'
 
-interface Advantage {
-  icon: typeof Zap
-  title: string
-  description: string
-}
+const icons = [KeyRound, Wrench, Cpu, MapPin]
 
-const advantages: Advantage[] = [
-  {
-    icon: Zap,
-    title: 'Быстро',
-    description: 'Большинство работ выполняем в день обращения',
-  },
-  {
-    icon: DollarSign,
-    title: 'Доступные цены',
-    description: 'Честные цены без скрытых доплат',
-  },
-  {
-    icon: Package,
-    title: 'Большой ассортимент',
-    description: 'Ключи и запчасти для всех популярных марок',
-  },
-  {
-    icon: MapPin,
-    title: 'Работаем в Бишкеке',
-    description: 'Удобное расположение и возможность выезда',
-  },
-]
-
-function AdvantageCard({ advantage }: { advantage: Advantage }) {
-  const Icon = advantage.icon
-
+export function WhyUsSection({ locale }: { locale: Locale }) {
+  const copy = getCopy(locale)
   return (
-    <div className="group rounded-2xl border border-cyan-400/60 bg-black text-white p-6 shadow-[0_18px_40px_rgba(0,0,0,0.9)] hover:-translate-y-1 hover:border-cyan-300/90 hover:shadow-[0_22px_50px_rgba(8,47,73,0.95)] transition-all duration-300">
-      <div className="flex items-start gap-4">
-        <div className="bg-slate-900 p-3 rounded-xl flex-shrink-0">
-          <Icon
-            size={24}
-            className="text-cyan-300 group-hover:text-cyan-200 transition-colors duration-300"
-          />
-        </div>
-        <div>
-          <h3 className="text-lg font-semibold text-white mb-1">
-            {advantage.title}
-          </h3>
-          <p className="text-slate-300/90 leading-relaxed text-sm md:text-base">
-            {advantage.description}
-          </p>
-        </div>
-      </div>
-    </div>
-  )
-}
-
-export function WhyUsSection() {
-  return (
-    <Section
-      id="why-us"
-      className="relative overflow-hidden bg-gradient-to-b from-slate-950 via-cyan-950 to-slate-950"
-    >
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-slate-950/90 via-cyan-950/70 to-slate-950/95" />
-      <div className="pointer-events-none absolute inset-0 opacity-25 mix-blend-soft-light [background-image:radial-gradient(circle_at_1px_1px,#1f2937_1px,transparent_0)] [background-size:32px_32px]" />
-
-      <Container className="relative z-10">
-        <Reveal className="text-center mb-12 space-y-3">
-          <h2 className="text-3xl md:text-4xl font-semibold text-white tracking-tight">
-            Почему выбирают нас
-          </h2>
-          <p className="text-slate-400 text-base md:text-lg max-w-2xl mx-auto">
-            Преимущества работы с нашим сервисом
-          </p>
-        </Reveal>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-          {advantages.map((advantage, index) => (
-            <Reveal
-              key={advantage.title}
-              delay={index * 100}
-            >
-              <AdvantageCard advantage={advantage} />
-            </Reveal>
-          ))}
+    <Section id="why-us" className="border-b border-white/[0.06] bg-[#0d1014] py-14 md:py-20">
+      <Container>
+        <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+          <Reveal>
+            <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl md:text-4xl">
+              {copy.why.title}
+            </h2>
+            <p className="mt-3 max-w-md text-sm leading-relaxed text-zinc-400 sm:text-base">
+              {copy.why.intro}
+            </p>
+          </Reveal>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {copy.why.items.map(([title, description], index) => {
+              const Icon = icons[index]
+              return (
+                <Reveal key={title} delay={index * 70}>
+                  <div className="flex h-full items-start gap-4 rounded-2xl border border-white/10 bg-[#12161b] p-5 transition-colors hover:border-sky-300/25 sm:p-6">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.03] text-sky-300">
+                      <Icon size={19} aria-hidden="true" />
+                    </div>
+                    <div>
+                      <h3 className="text-base font-semibold text-white">{title}</h3>
+                      <p className="mt-1.5 text-sm leading-relaxed text-zinc-400">{description}</p>
+                    </div>
+                  </div>
+                </Reveal>
+              )
+            })}
+          </div>
         </div>
       </Container>
     </Section>

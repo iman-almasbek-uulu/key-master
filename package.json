@@ -14,6 +14,7 @@
     "lint": "eslint src --ext .ts,.tsx,.js,.jsx",
     "typecheck": "tsc --noEmit",
     "test": "node scripts/verify-public-config.mjs",
+    "test:built": "node scripts/verify-built-site.mjs",
     "prepare": "husky",
     "format": "prettier --write ."
   },

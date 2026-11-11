@@ -1,208 +1,104 @@
-'use client'
-
-import { useRef } from 'react'
-import { useGSAP } from '@gsap/react'
-import { gsap } from 'gsap'
-import { ChevronRight, Clock, Key, Phone } from 'lucide-react'
+import { Clock, MessageCircle, Phone } from 'lucide-react'
 
 import { Container } from '@/src/components/ui/container'
 import { CustomButton } from '@/src/components/ui/custom-button'
-import { siteConfig } from '@/src/config/site'
+import { contactLinks, defaultWhatsAppLink } from '@/src/config/links'
+import { assetPath } from '@/src/config/site'
+import { getCopy, type Locale } from '@/src/i18n/site-copy'
 
-export function Hero() {
-  const section = useRef<HTMLElement>(null)
-
-  useGSAP(
-    () => {
-      const media = gsap.matchMedia()
-
-      media.add('(prefers-reduced-motion: no-preference)', () => {
-        const timeline = gsap.timeline({
-          defaults: { ease: 'power3.out' },
-        })
-
-        timeline
-          .from('[data-hero-item="badge"]', { autoAlpha: 0, y: 18, duration: 0.55 })
-          .from('[data-hero-item="title"]', { autoAlpha: 0, y: 28, duration: 0.7 }, '-=0.25')
-          .from('[data-hero-item="description"]', { autoAlpha: 0, y: 20, duration: 0.55 }, '-=0.35')
-          .from('[data-hero-item="actions"]', { autoAlpha: 0, y: 18, duration: 0.5 }, '-=0.3')
-          .from('[data-hero-item="stats"]', { autoAlpha: 0, y: 18, duration: 0.5 }, '-=0.2')
-
-        // Постоянные движения намеренно заметны: посетитель видит «живой» сайт
-        // даже после того, как короткая стартовая анимация уже закончилась.
-        gsap.to('[data-hero-glow="left"]', {
-          x: 42,
-          y: -30,
-          scale: 1.22,
-          duration: 3.8,
-          ease: 'sine.inOut',
-          repeat: -1,
-          yoyo: true,
-        })
-        gsap.to('[data-hero-glow="right"]', {
-          x: -36,
-          y: 26,
-          scale: 1.18,
-          duration: 4.6,
-          ease: 'sine.inOut',
-          repeat: -1,
-          yoyo: true,
-        })
-        gsap.to('[data-hero-key]', {
-          rotation: '+=12',
-          y: -12,
-          duration: 3.2,
-          ease: 'sine.inOut',
-          repeat: -1,
-          yoyo: true,
-        })
-        gsap.to('[data-hero-cta]', {
-          y: -3,
-          scale: 1.045,
-          duration: 1.05,
-          ease: 'sine.inOut',
-          repeat: -1,
-          yoyo: true,
-        })
-        gsap.to('[data-hero-item="stat"]', {
-          y: -8,
-          duration: 1.35,
-          ease: 'sine.inOut',
-          stagger: { each: 0.22, repeat: -1, yoyo: true },
-          repeat: -1,
-          yoyo: true,
-        })
-        gsap.to('[data-hero-scroll]', {
-          y: 10,
-          duration: 0.85,
-          ease: 'sine.inOut',
-          repeat: -1,
-          yoyo: true,
-        })
-      })
-
-      return () => media.revert()
-    },
-    { scope: section },
-  )
-
+export function Hero({ locale }: { locale: Locale }) {
+  const copy = getCopy(locale)
   return (
     <section
-      ref={section}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      id="top"
+      className="relative isolate min-h-[680px] overflow-hidden border-b border-white/[0.06] bg-[#0b0d10] md:min-h-[540px] lg:min-h-[620px]"
     >
-      <picture className="absolute inset-0">
-        <source media="(max-width: 639px)" srcSet="images/hero-locksmith-mobile-v2.png" />
-        <img
-          src="images/hero-locksmith.png"
-          alt=""
-          className="h-full w-full object-cover object-center brightness-150 contrast-125 max-sm:object-contain max-sm:object-top"
-        />
-      </picture>
-      <div className="absolute inset-0 bg-gradient-to-r from-slate-950/20 via-transparent to-slate-950/20" />
-      <div className="absolute inset-0 grid-pattern" />
-      <div className="absolute inset-0 diagonal-lines" />
-
       <div
-        data-hero-glow="left"
-        className="absolute top-1/4 left-1/4 w-96 h-96 bg-sky-500/10 rounded-full blur-3xl will-change-transform"
-      />
-      <div
-        data-hero-glow="right"
-        className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl will-change-transform"
-      />
-
-      <div
-        data-hero-key
-        className="absolute top-16 right-6 sm:right-10 lg:right-20 opacity-[0.12] will-change-transform"
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
       >
-        <Key className="w-[240px] h-[240px] sm:w-[320px] sm:h-[320px] lg:w-[420px] lg:h-[420px] rotate-45" />
+        <picture className="absolute inset-0 block">
+          <source
+            media="(min-width: 768px)"
+            srcSet={assetPath('/images/generated/hero-locksmith-wide.webp')}
+            type="image/webp"
+          />
+          <img
+            src={assetPath('/images/generated/hero-locksmith-phone.webp')}
+            alt=""
+            fetchPriority="high"
+            className="h-full w-full object-cover object-[center_bottom]"
+          />
+        </picture>
+        <span className="absolute inset-0 bg-gradient-to-b from-[#0b0d10]/65 via-[#0b0d10]/10 via-55% to-transparent md:bg-gradient-to-r md:from-[#0b0d10]/75 md:via-[#0b0d10]/35 md:via-50% md:to-transparent" />
       </div>
 
-      <Container className="relative z-10 py-24 sm:py-28 lg:py-32">
-        <div className="text-center">
-          <div
-            data-hero-item="badge"
-            className="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full border border-sky-500/30 text-sky-300 bg-sky-500/5"
-          >
-            <Clock className="w-4 h-4" />
-            <span className="text-sm font-medium">Срочно / в день обращения</span>
-          </div>
-
-          <h1
-            data-hero-item="title"
-            className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 leading-tight"
-          >
-            <span className="text-gradient">{siteConfig.name}</span>
-            <br />
-            <span className="text-white">Ремонт и изготовление ключей</span>
+      <Container className="relative z-10 flex min-h-[680px] items-start md:min-h-[540px] md:items-center lg:min-h-[620px]">
+        <div className="min-w-0 max-w-2xl py-7 sm:py-12 md:py-16 lg:py-20">
+          <h1 className="hero-enter text-balance text-[1.95rem] leading-[1.08] tracking-[-0.03em] text-zinc-50 sm:text-[2.75rem] lg:text-[3.45rem] xl:text-[3.8rem]">
+            {copy.hero.cityFirst ? (
+              <>
+                <span className="text-sky-300">{copy.hero.city}</span>{' '}
+                {copy.hero.title}
+              </>
+            ) : (
+              <>
+                {copy.hero.title}{' '}
+                <span className="text-sky-300">{copy.hero.city}</span>
+              </>
+            )}
           </h1>
 
-          <p
-            data-hero-item="description"
-            className="text-lg sm:text-xl text-zinc-400 max-w-3xl mx-auto mb-10 leading-relaxed"
-          >
-            {siteConfig.description}
+          <p className="hero-enter hero-enter-delay-1 mt-4 max-w-xl text-[15px] leading-relaxed text-zinc-100/90 sm:mt-5 sm:text-lg">
+            {copy.hero.description}
           </p>
 
-          <div
-            data-hero-item="actions"
-            className="flex flex-col sm:flex-row gap-4 justify-center mb-14"
-          >
-            <div data-hero-cta className="will-change-transform">
-              <CustomButton
-                size="lg"
-                className="group bg-sky-500 hover:bg-sky-400 text-slate-950 focus:ring-sky-400 border border-sky-300/30"
-                href={`tel:${siteConfig.phone}`}
-              >
-                <Phone className="w-5 h-5 mr-2" />
-                Позвонить
-                <ChevronRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-              </CustomButton>
-            </div>
+          <p className="hero-enter hero-enter-delay-1 mt-4 flex items-center gap-2.5 text-sm text-zinc-100 sm:mt-5">
+            <Clock
+              size={17}
+              className="shrink-0 text-sky-300"
+              aria-hidden="true"
+            />
+            <span>{copy.contact.hoursValue}</span>
+          </p>
+
+          <div className="hero-enter hero-enter-delay-2 mt-5 grid gap-2.5 sm:mt-7 sm:flex sm:flex-wrap sm:gap-3">
             <CustomButton
+              href={contactLinks.call}
               size="lg"
-              variant="outline"
-              className="border-zinc-700 text-zinc-200 hover:bg-zinc-900/60"
-              href="#services"
+              className="w-full sm:w-auto"
             >
-              Узнать услуги
+              <Phone
+                size={18}
+                aria-hidden="true"
+              />
+              {copy.call}
+            </CustomButton>
+            <CustomButton
+              href={defaultWhatsAppLink(locale)}
+              variant="outline"
+              size="lg"
+              className="w-full sm:w-auto"
+            >
+              <MessageCircle
+                size={18}
+                aria-hidden="true"
+              />
+              {copy.whatsapp}
             </CustomButton>
           </div>
 
-          <div
-            data-hero-item="stats"
-            className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8"
-          >
-            {[
-              { value: '15', label: 'минут выезд', suffix: 'мин' },
-              { value: '10', label: 'лет опыта', suffix: '+' },
-              { value: '5000', label: 'довольных клиентов', suffix: '+' },
-              { value: '9:00–21:00', label: 'режим работы', suffix: '' },
-            ].map((stat) => (
-              <div
-                key={stat.label}
-                data-hero-item="stat"
-                className="p-5 sm:p-6 rounded-2xl bg-zinc-900/50 border border-zinc-800 hover:border-sky-500/30 hover:-translate-y-1 transition-all duration-300"
-              >
-                <div className="text-3xl lg:text-4xl font-bold text-gradient">
-                  {stat.value}
-                  {stat.suffix}
-                </div>
-                <div className="text-xs sm:text-sm text-zinc-500 mt-1 uppercase tracking-wider">
-                  {stat.label}
-                </div>
-              </div>
-            ))}
-          </div>
+          <p className="hero-enter hero-enter-delay-2 mt-4 max-w-lg text-xs leading-relaxed text-zinc-100/75 sm:text-[13px]">
+            {copy.hero.note}
+          </p>
         </div>
       </Container>
 
-      <div data-hero-scroll className="absolute bottom-10 left-1/2 -translate-x-1/2 will-change-transform">
-        <div className="w-6 h-10 rounded-full border-2 border-zinc-600 flex items-start justify-center p-2">
-          <div className="w-1 h-2 bg-sky-500 rounded-full" />
-        </div>
-      </div>
+      <div
+        id="hero-end"
+        aria-hidden="true"
+        className="absolute bottom-0 left-0 h-px w-px"
+      />
     </section>
   )
 }

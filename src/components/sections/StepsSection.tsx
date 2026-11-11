@@ -1,95 +1,51 @@
-import { CheckCircle, DollarSign, MessageSquare, Search } from 'lucide-react'
+import { CheckCircle, KeyRound, MessageSquare, Search } from 'lucide-react'
 
 import { Container } from '@/src/components/ui/container'
 import { Reveal } from '@/src/components/ui/reveal'
 import { Section } from '@/src/components/ui/section'
+import { getCopy, type Locale } from '@/src/i18n/site-copy'
 
-interface Step {
-  number: number
-  icon: typeof MessageSquare
-  title: string
-  description: string
-}
+const icons = [MessageSquare, Search, KeyRound, CheckCircle]
 
-const steps: Step[] = [
-  {
-    number: 1,
-    icon: MessageSquare,
-    title: 'Связь в мессенджере',
-    description: 'Напишите нам в WhatsApp или Telegram',
-  },
-  {
-    number: 2,
-    icon: Search,
-    title: 'Уточнение авто и ключа',
-    description: 'Расскажите о марке автомобиля и типе ключа',
-  },
-  {
-    number: 3,
-    icon: DollarSign,
-    title: 'Согласование цены',
-    description: 'Узнаете точную стоимость работы',
-  },
-  {
-    number: 4,
-    icon: CheckCircle,
-    title: 'Выполнение работы',
-    description: 'Быстро и качественно изготовим ваш ключ',
-  },
-]
-
-function StepCard({ step }: { step: Step }) {
-  const Icon = step.icon
-
+export function StepsSection({ locale }: { locale: Locale }) {
+  const copy = getCopy(locale)
   return (
-    <div className="relative group">
-      <div className="flex flex-col items-center text-center gap-3 rounded-2xl border border-slate-800/80 bg-slate-950/70 px-5 py-6 shadow-[0_18px_40px_rgba(15,23,42,0.7)] hover:-translate-y-1 hover:border-cyan-500/50 transition-all duration-300">
-        <div className="relative mb-2">
-          <div className="bg-slate-900/90 px-4 py-3 rounded-full">
-            <Icon
-              size={26}
-              className="text-cyan-300 group-hover:text-cyan-200 transition-colors duration-300"
-            />
-          </div>
-          <div className="absolute -top-2 -right-2 bg-cyan-500 text-slate-950 w-8 h-8 rounded-full flex items-center justify-center font-semibold text-xs">
-            {step.number}
-          </div>
-        </div>
-        <h3 className="text-lg font-semibold text-white">{step.title}</h3>
-        <p className="text-slate-300/90 leading-relaxed text-sm md:text-base">
-          {step.description}
-        </p>
-      </div>
-    </div>
-  )
-}
-
-export function StepsSection() {
-  return (
-    <Section
-      id="steps"
-      className="bg-gradient-to-b from-slate-950 via-violet-950 to-slate-950"
-    >
+    <Section id="steps" className="border-b border-white/[0.06] bg-[#0b0d10] py-14 md:py-20">
       <Container>
-        <Reveal className="text-center mb-12 space-y-3">
-          <h2 className="text-3xl md:text-4xl font-semibold text-white tracking-tight">
-            Как мы работаем
+        <Reveal className="max-w-2xl">
+          <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl md:text-4xl">
+            {copy.steps.title}
           </h2>
-          <p className="text-slate-400 text-base md:text-lg max-w-2xl mx-auto">
-            Простой процесс от заявки до готового ключа
+          <p className="mt-3 text-sm leading-relaxed text-zinc-400 sm:text-base">
+            {copy.steps.intro}
           </p>
         </Reveal>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {steps.map((step, index) => (
-            <Reveal
-              key={step.number}
-              delay={index * 100}
-            >
-              <StepCard step={step} />
-            </Reveal>
-          ))}
+        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {copy.steps.items.map(([title, description], index) => {
+            const Icon = icons[index]
+            return (
+              <Reveal key={title} delay={index * 70}>
+                <div className="flex h-full flex-col rounded-2xl border border-white/10 bg-[#101419] p-5 transition-colors hover:border-sky-300/25">
+                  <div className="flex items-center justify-between">
+                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.03] text-sky-300">
+                      <Icon size={19} aria-hidden="true" />
+                    </span>
+                    <span className="text-[11px] font-medium tracking-[0.22em] text-zinc-500">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                  </div>
+                  <h3 className="mt-5 text-base font-semibold leading-snug text-white">{title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-zinc-400">{description}</p>
+                </div>
+              </Reveal>
+            )
+          })}
         </div>
+        <Reveal className="mt-9 flex flex-wrap items-center gap-x-7 gap-y-2 border-t border-white/[0.07] pt-5 text-xs text-zinc-500 sm:text-[13px]">
+          {copy.steps.facts.map((fact) => (
+            <span key={fact}>{fact}</span>
+          ))}
+        </Reveal>
       </Container>
     </Section>
   )

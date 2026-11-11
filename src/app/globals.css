@@ -3,6 +3,12 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --graphite: 11 13 16;
+    --graphite-raised: 15 18 22;
+    --accent: 52 185 254;
+  }
+
   * {
     margin: 0;
     padding: 0;
@@ -14,8 +20,19 @@
   }
 
   body {
-    @apply bg-slate-950 text-slate-100 antialiased;
+    @apply bg-[#0b0d10] text-zinc-100 antialiased;
     min-height: 100vh;
+    overflow-x: clip;
+  }
+
+  ::selection {
+    background: #34b9fe;
+    color: #06121a;
+  }
+
+  :focus-visible {
+    outline: 2px solid #7dd3fc;
+    outline-offset: 3px;
   }
 
   h1,
@@ -31,47 +48,83 @@
   a {
     -webkit-tap-highlight-color: transparent;
   }
+
+  section[id] {
+    scroll-margin-top: 5.5rem;
+  }
 }
 
 @layer utilities {
   .text-gradient {
-    background-image: linear-gradient(90deg, #38bdf8, #2563eb, #38bdf8);
+    background-image: linear-gradient(90deg, #7dd3fc, #34b9fe);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
   }
 
-  .grid-pattern {
-    background-image: radial-gradient(
-      circle at 1px 1px,
-      rgba(161, 161, 170, 0.35) 1px,
-      transparent 0
-    );
-    background-size: 36px 36px;
-    opacity: 0.12;
-    mix-blend-mode: overlay;
+  .text-balance {
+    text-wrap: balance;
   }
 
-  .diagonal-lines {
-    background-image: repeating-linear-gradient(
-      135deg,
-      rgba(56, 189, 248, 0.14) 0,
-      rgba(56, 189, 248, 0.14) 1px,
-      transparent 1px,
-      transparent 12px
-    );
-    opacity: 0.18;
-    mix-blend-mode: overlay;
+  .hairline {
+    border-color: rgb(255 255 255 / 0.08);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-enter {
+      animation: hero-enter 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .hero-enter-delay-1 {
+      animation-delay: 0.08s;
+    }
+
+    .hero-enter-delay-2 {
+      animation-delay: 0.16s;
+    }
+
+    .hero-enter-delay-3 {
+      animation-delay: 0.24s;
+    }
+
+    .bar-enter {
+      animation: bar-enter 0.22s ease-out both;
+    }
+  }
+
+  @keyframes hero-enter {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes bar-enter {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
     *,
     *::before,
     *::after {
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
-      scroll-behavior: auto !important;
     }
   }
 }

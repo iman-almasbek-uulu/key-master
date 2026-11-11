@@ -1,61 +1,38 @@
 import { Container } from '@/src/components/ui/container'
 import { Reveal } from '@/src/components/ui/reveal'
 import { Section } from '@/src/components/ui/section'
+import { brandNames, getCopy, type Locale } from '@/src/i18n/site-copy'
 
-const brands = [
-  'Toyota',
-  'Honda',
-  'BMW',
-  'Mercedes-Benz',
-  'Kia',
-  'Hyundai',
-  'Nissan',
-  'Volkswagen',
-  'Audi',
-  'Lexus',
-  'Mazda',
-  'Subaru',
-]
-
-function BrandBadge({ name }: { name: string }) {
-  return (
-    <div className="rounded-xl border border-slate-800/80 bg-slate-950/70 px-6 py-3 text-slate-100/90 font-medium hover:-translate-y-0.5 hover:border-cyan-500/60 hover:text-cyan-100 transition-all duration-200">
-      {name}
-    </div>
-  )
-}
-
-export function BrandsSection() {
+export function BrandsSection({ locale }: { locale: Locale }) {
+  const copy = getCopy(locale)
   return (
     <Section
       id="brands"
-      className="bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950"
+      className="border-b border-white/[0.06] bg-[#0b0d10] py-14 md:py-20"
     >
       <Container>
-        <Reveal className="text-center mb-12 space-y-3">
-          <h2 className="text-3xl md:text-4xl font-semibold text-white tracking-tight">
-            Популярные марки автомобилей
-          </h2>
-          <p className="text-slate-400 text-base md:text-lg max-w-2xl mx-auto">
-            Работаем со всеми популярными марками и многими другими
-          </p>
-        </Reveal>
+        <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-start lg:gap-16">
+          <Reveal>
+            <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl md:text-4xl">
+              {copy.brands.title}
+            </h2>
+            <p className="mt-3 max-w-md text-sm leading-relaxed text-zinc-400 sm:text-base">
+              {copy.brands.description}
+            </p>
+          </Reveal>
 
-        <div className="flex flex-wrap justify-center gap-4">
-          {brands.map((brand, index) => (
-            <Reveal
-              key={brand}
-              delay={index * 55}
-            >
-              <BrandBadge name={brand} />
-            </Reveal>
-          ))}
-        </div>
-
-        <div className="text-center mt-8">
-          <p className="text-slate-500 text-sm md:text-base">
-            И многие другие марки автомобилей
-          </p>
+          <Reveal delay={80}>
+            <ul className="flex flex-wrap gap-2">
+              {brandNames.map((brand) => (
+                <li
+                  key={brand}
+                  className="rounded-lg border border-white/10 bg-white/[0.03] px-3.5 py-2 text-sm text-zinc-300 transition-colors hover:border-sky-300/25 hover:text-zinc-100"
+                >
+                  {brand}
+                </li>
+              ))}
+            </ul>
+          </Reveal>
         </div>
       </Container>
     </Section>
