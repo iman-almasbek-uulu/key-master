@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 
-import { assetPath, pageUrl, siteConfig } from '@/src/config/site'
+import { assetPath, contactPhones, ogImageUrl, pageUrl, siteConfig } from '@/src/config/site'
 import { contactLinks } from '@/src/config/links'
 import { services } from '@/src/data/services'
 import { getCopy, getFaq, type Locale } from '@/src/i18n/site-copy'
@@ -10,7 +10,7 @@ const workshopImage = new URL('images/generated/hero-locksmith-wide.webp', siteC
 export function metadataFor(locale: Locale): Metadata {
   const copy = getCopy(locale)
   const currentUrl = pageUrl(locale)
-  const imageDimensions = { width: 1536, height: 1024 }
+  const imageDimensions = { width: 1200, height: 630 }
 
   return {
     title: copy.title,
@@ -53,7 +53,7 @@ export function metadataFor(locale: Locale): Metadata {
       siteName: siteConfig.name,
       images: [
         {
-          url: workshopImage,
+          url: ogImageUrl,
           ...imageDimensions,
           alt: copy.ogAlt,
         },
@@ -63,7 +63,7 @@ export function metadataFor(locale: Locale): Metadata {
       card: 'summary_large_image',
       title: copy.title,
       description: copy.description,
-      images: [workshopImage],
+      images: [ogImageUrl],
     },
   }
 }
@@ -91,8 +91,16 @@ export function structuredData(locale: Locale) {
       name: siteConfig.name,
       description: copy.description,
       url: siteConfig.url,
-      image: workshopImage,
+      image: [ogImageUrl, workshopImage],
+      logo: new URL('images/generated/apple-touch-icon.png', siteConfig.url).toString(),
+      knowsLanguage: ['ru', 'ky'],
       telephone: siteConfig.phone,
+      contactPoint: contactPhones.map((phone) => ({
+        '@type': 'ContactPoint',
+        telephone: phone.number,
+        contactType: 'customer service',
+        areaServed: 'KG',
+      })),
       sameAs: [contactLinks.whatsapp, contactLinks.telegram],
       hasMap: contactLinks.route,
       address: {
@@ -135,6 +143,7 @@ export function structuredData(locale: Locale) {
     {
       '@context': 'https://schema.org',
       '@type': 'FAQPage',
+      inLanguage: locale,
       mainEntity: faq.map((item) => ({
         '@type': 'Question',
         name: item.question,

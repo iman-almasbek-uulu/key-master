@@ -12,8 +12,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
       'x-default': pageUrl('ru'),
     },
   }
+  const lastModified = new Date()
   return [
-    { url: pageUrl('ru'), alternates },
-    { url: pageUrl('ky'), alternates },
+    { url: pageUrl('ru'), lastModified, changeFrequency: 'monthly', priority: 1, alternates },
+    { url: pageUrl('ky'), lastModified, changeFrequency: 'monthly', priority: 0.9, alternates },
   ]
 }

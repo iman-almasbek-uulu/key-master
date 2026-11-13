@@ -1,7 +1,7 @@
 import { Container } from '@/src/components/ui/container'
 import { Reveal } from '@/src/components/ui/reveal'
 import { Section } from '@/src/components/ui/section'
-import { brandNames, getCopy, type Locale } from '@/src/i18n/site-copy'
+import { brandGroups, getCopy, type Locale } from '@/src/i18n/site-copy'
 
 export function BrandsSection({ locale }: { locale: Locale }) {
   const copy = getCopy(locale)
@@ -19,19 +19,31 @@ export function BrandsSection({ locale }: { locale: Locale }) {
             <p className="mt-3 max-w-md text-sm leading-relaxed text-zinc-400 sm:text-base">
               {copy.brands.description}
             </p>
+            <p className="mt-3 max-w-md text-sm leading-relaxed text-zinc-500">
+              {copy.brands.detail}
+            </p>
           </Reveal>
 
           <Reveal delay={80}>
-            <ul className="flex flex-wrap gap-2">
-              {brandNames.map((brand) => (
-                <li
-                  key={brand}
-                  className="rounded-lg border border-white/10 bg-white/[0.03] px-3.5 py-2 text-sm text-zinc-300 transition-colors hover:border-sky-300/25 hover:text-zinc-100"
-                >
-                  {brand}
-                </li>
+            <div className="space-y-5">
+              {brandGroups.map((group) => (
+                <div key={group.id}>
+                  <h3 className="text-[11px] font-medium uppercase tracking-[0.16em] text-zinc-500">
+                    {copy.brands.groups[group.id]}
+                  </h3>
+                  <ul className="mt-2 flex flex-wrap gap-2">
+                    {group.brands.map((brand) => (
+                      <li
+                        key={brand}
+                        className="rounded-lg border border-white/10 bg-white/[0.03] px-3.5 py-2 text-sm text-zinc-300 transition-colors hover:border-sky-300/25 hover:text-zinc-100"
+                      >
+                        {brand}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               ))}
-            </ul>
+            </div>
           </Reveal>
         </div>
       </Container>

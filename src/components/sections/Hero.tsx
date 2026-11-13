@@ -1,9 +1,8 @@
 import { Clock, MessageCircle, Phone } from 'lucide-react'
 
 import { Container } from '@/src/components/ui/container'
-import { CustomButton } from '@/src/components/ui/custom-button'
-import { contactLinks, defaultWhatsAppLink } from '@/src/config/links'
-import { assetPath } from '@/src/config/site'
+import { defaultWhatsAppLink } from '@/src/config/links'
+import { assetPath, contactPhones, siteConfig } from '@/src/config/site'
 import { getCopy, type Locale } from '@/src/i18n/site-copy'
 
 export function Hero({ locale }: { locale: Locale }) {
@@ -11,7 +10,7 @@ export function Hero({ locale }: { locale: Locale }) {
   return (
     <section
       id="top"
-      className="relative isolate min-h-[680px] overflow-hidden border-b border-white/[0.06] bg-[#0b0d10] md:min-h-[540px] lg:min-h-[620px]"
+      className="relative isolate min-h-[calc(100svh-4rem)] overflow-hidden border-b border-white/[0.06] bg-[#0b0d10] md:min-h-[calc(100svh-4.75rem)]"
     >
       <div
         aria-hidden="true"
@@ -30,12 +29,12 @@ export function Hero({ locale }: { locale: Locale }) {
             className="h-full w-full object-cover object-[center_bottom]"
           />
         </picture>
-        <span className="absolute inset-0 bg-gradient-to-b from-[#0b0d10]/65 via-[#0b0d10]/10 via-55% to-transparent md:bg-gradient-to-r md:from-[#0b0d10]/75 md:via-[#0b0d10]/35 md:via-50% md:to-transparent" />
+        <span className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(11,13,16,0.94)_0%,rgba(11,13,16,0.78)_52%,rgba(11,13,16,0.56)_100%)]" />
       </div>
 
-      <Container className="relative z-10 flex min-h-[680px] items-start md:min-h-[540px] md:items-center lg:min-h-[620px]">
-        <div className="min-w-0 max-w-2xl py-7 sm:py-12 md:py-16 lg:py-20">
-          <h1 className="hero-enter text-balance text-[1.95rem] leading-[1.08] tracking-[-0.03em] text-zinc-50 sm:text-[2.75rem] lg:text-[3.45rem] xl:text-[3.8rem]">
+      <Container className="relative z-10 flex min-h-[inherit] items-center justify-center py-6 sm:py-10">
+        <div className="w-full min-w-0 max-w-[780px] text-center">
+          <h1 className="hero-enter text-balance text-[1.8rem] leading-[1.12] tracking-[-0.025em] text-zinc-50 sm:text-[2.5rem] lg:text-[3rem]">
             {copy.hero.cityFirst ? (
               <>
                 <span className="text-sky-300">{copy.hero.city}</span>{' '}
@@ -49,47 +48,44 @@ export function Hero({ locale }: { locale: Locale }) {
             )}
           </h1>
 
-          <p className="hero-enter hero-enter-delay-1 mt-4 max-w-xl text-[15px] leading-relaxed text-zinc-100/90 sm:mt-5 sm:text-lg">
-            {copy.hero.description}
+          <p className="brand-wordmark hero-enter hero-enter-delay-1 mt-1 text-[3.25rem] leading-[0.98] tracking-[-0.035em] text-sky-300 sm:text-[4.1rem] lg:text-[5.25rem]">
+            {siteConfig.name}
           </p>
 
-          <p className="hero-enter hero-enter-delay-1 mt-4 flex items-center gap-2.5 text-sm text-zinc-100 sm:mt-5">
-            <Clock
-              size={17}
-              className="shrink-0 text-sky-300"
-              aria-hidden="true"
-            />
-            <span>{copy.contact.hoursValue}</span>
-          </p>
-
-          <div className="hero-enter hero-enter-delay-2 mt-5 grid gap-2.5 sm:mt-7 sm:flex sm:flex-wrap sm:gap-3">
-            <CustomButton
-              href={contactLinks.call}
-              size="lg"
-              className="w-full sm:w-auto"
-            >
-              <Phone
-                size={18}
-                aria-hidden="true"
-              />
-              {copy.call}
-            </CustomButton>
-            <CustomButton
+          <div className="hero-enter hero-enter-delay-2 mx-auto mt-4 grid w-full max-w-[760px] gap-2 sm:mt-5 md:grid-cols-3">
+            {contactPhones.map((phone) => (
+              <a
+                key={phone.id}
+                href={phone.href}
+                aria-label={`${copy.call}: ${phone.display}`}
+                className="group flex min-h-12 min-w-0 w-full items-center gap-2 rounded-xl border border-white/10 bg-[#151b21] px-3 text-zinc-50 transition-colors hover:border-sky-300/35 hover:bg-[#1a2229] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0b0d10]"
+              >
+                <Phone size={17} aria-hidden="true" className="shrink-0 text-[#79cefa]" />
+                <span className="min-w-0 flex-1 whitespace-nowrap text-sm font-semibold tabular-nums tracking-[0.01em] transition-colors group-hover:text-sky-100 sm:text-[15px]">
+                  {phone.display}
+                </span>
+                <span className="shrink-0 text-xs text-zinc-400 transition-colors group-hover:text-zinc-200 sm:text-[13px]">
+                  {copy.call}
+                </span>
+              </a>
+            ))}
+            <a
               href={defaultWhatsAppLink(locale)}
-              variant="outline"
-              size="lg"
-              className="w-full sm:w-auto"
+              aria-label="WhatsApp"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex min-h-12 w-full items-center justify-center gap-2 rounded-xl border border-[#8cdbb0]/30 bg-[#173428] px-3 text-zinc-50 transition-colors hover:border-[#8cdbb0]/55 hover:bg-[#1c4031] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8cdbb0] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0b0d10]"
             >
-              <MessageCircle
-                size={18}
-                aria-hidden="true"
-              />
-              {copy.whatsapp}
-            </CustomButton>
+              <MessageCircle size={18} aria-hidden="true" className="shrink-0 text-[#8cdbb0]" />
+              <span className="text-sm font-semibold transition-colors group-hover:text-white sm:text-[15px]">
+                {copy.whatsappShort}
+              </span>
+            </a>
           </div>
 
-          <p className="hero-enter hero-enter-delay-2 mt-4 max-w-lg text-xs leading-relaxed text-zinc-100/75 sm:text-[13px]">
-            {copy.hero.note}
+          <p className="hero-enter hero-enter-delay-2 mx-auto mt-3 flex max-w-full items-center justify-center gap-2 text-center text-sm leading-snug text-zinc-100/90">
+            <Clock size={16} className="shrink-0 text-sky-300" aria-hidden="true" />
+            {copy.contact.hoursValue}
           </p>
         </div>
       </Container>

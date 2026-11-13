@@ -4,7 +4,7 @@ import { Container } from '@/src/components/ui/container'
 import { CustomButton } from '@/src/components/ui/custom-button'
 import { Section } from '@/src/components/ui/section'
 import { contactLinks, defaultWhatsAppLink } from '@/src/config/links'
-import { siteConfig } from '@/src/config/site'
+import { contactPhones } from '@/src/config/site'
 import { getCopy, type Locale } from '@/src/i18n/site-copy'
 
 export function ContactSection({ locale }: { locale: Locale }) {
@@ -30,12 +30,20 @@ export function ContactSection({ locale }: { locale: Locale }) {
               <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-zinc-500">
                 {copy.contact.phone}
               </p>
-              <a
-                href={contactLinks.call}
-                className="mt-1 block text-2xl font-semibold tracking-tight text-white transition-colors hover:text-sky-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 sm:text-[1.7rem]"
-              >
-                {siteConfig.phoneDisplay}
-              </a>
+              <div className="mt-2 grid gap-3 sm:grid-cols-2">
+                {contactPhones.map((phone) => (
+                  <div key={phone.id} className="min-w-0">
+                    <span className="block text-xs font-semibold text-sky-300">{phone.operator}</span>
+                    <a
+                      href={phone.href}
+                      aria-label={`${phone.operator}: ${phone.display}`}
+                      className="mt-0.5 inline-flex text-lg font-semibold tracking-tight text-white transition-colors hover:text-sky-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 sm:text-xl"
+                    >
+                      {phone.display}
+                    </a>
+                  </div>
+                ))}
+              </div>
 
               <dl className="mt-6 space-y-4 border-t border-white/[0.07] pt-5">
                 <div className="flex items-start gap-3">

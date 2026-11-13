@@ -66,6 +66,12 @@
     text-wrap: balance;
   }
 
+  .brand-wordmark {
+    font-family: var(--font-brand), sans-serif;
+    font-style: italic;
+    font-weight: 700;
+  }
+
   .hairline {
     border-color: rgb(255 255 255 / 0.08);
   }

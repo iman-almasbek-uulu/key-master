@@ -46,7 +46,7 @@ export function Header({ locale }: { locale: Locale }) {
             className="flex min-w-0 shrink-0 items-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0b0d10]"
             aria-label={copy.homeLabel}
           >
-            <span className="truncate text-xs font-semibold tracking-[0.08em] text-zinc-100 sm:text-sm sm:tracking-[0.14em]">
+            <span className="brand-wordmark whitespace-nowrap text-xs tracking-[0.08em] text-zinc-100 sm:text-sm sm:tracking-[0.14em]">
               {siteConfig.name}
             </span>
           </a>

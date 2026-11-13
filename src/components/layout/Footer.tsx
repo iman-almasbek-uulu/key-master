@@ -23,7 +23,7 @@ export function Footer({ locale }: { locale: Locale }) {
               className="inline-flex items-center rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300"
               aria-label={copy.footer.homeLabel}
             >
-              <span className="text-[13px] font-semibold tracking-[0.14em] text-zinc-100">
+              <span className="brand-wordmark text-[13px] tracking-[0.14em] text-zinc-100">
                 {siteConfig.name}
               </span>
             </a>

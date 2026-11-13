@@ -15,6 +15,10 @@
 # production
 /build
 
+# ручная выгрузка на хостинг (собирается автоматически)
+/upload-to-hostia/
+/autozamok-site.zip
+
 # misc
 .DS_Store
 *.pem

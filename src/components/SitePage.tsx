@@ -7,7 +7,6 @@ import { FaqSection } from '@/src/components/sections/FaqSection'
 import { Hero } from '@/src/components/sections/Hero'
 import { ServicesSection } from '@/src/components/sections/ServicesSection'
 import { StepsSection } from '@/src/components/sections/StepsSection'
-import { WhyUsSection } from '@/src/components/sections/WhyUsSection'
 import type { Locale } from '@/src/i18n/site-copy'
 
 export function SitePage({ locale }: { locale: Locale }) {
@@ -19,7 +18,6 @@ export function SitePage({ locale }: { locale: Locale }) {
         <Hero locale={locale} />
         <ServicesSection locale={locale} />
         <StepsSection locale={locale} />
-        <WhyUsSection locale={locale} />
         <BrandsSection locale={locale} />
         <FaqSection locale={locale} />
         <ContactSection locale={locale} />

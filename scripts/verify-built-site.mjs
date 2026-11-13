@@ -15,8 +15,8 @@ const deploymentBase = normalizeBasePath(
 const canonicalSite = new URL(process.env.NEXT_PUBLIC_SITE_URL ?? publicSite.url)
 canonicalSite.pathname = `${canonicalSite.pathname.replace(/\/+$/, '')}/`
 const pages = [
-  { locale: 'ru', path: 'index.html', alternate: 'ky', image: 'hero-locksmith-wide.webp' },
-  { locale: 'ky', path: join('ky', 'index.html'), alternate: 'ru', image: 'hero-locksmith-wide.webp' },
+  { locale: 'ru', path: 'index.html', alternate: 'ky', image: 'og-autozamok.jpg' },
+  { locale: 'ky', path: join('ky', 'index.html'), alternate: 'ru', image: 'og-autozamok.jpg' },
 ]
 const failures = []
 const check = (condition, message) => {
@@ -106,7 +106,7 @@ for (const page of pages) {
   check(description.length > 0 && decodeHtml(description).length <= 160, `${page.locale}: description должен быть не длиннее 160 символов`)
   if (page.locale === 'ky') {
     check(stripTags(h1s[0]?.[1] ?? '') === 'Бишкекте унаа ачкычтарын жасоо жана оңдоо', 'ky: неверный H1')
-    check(decodeHtml(description) === 'Бишкекте унаа ачкычтарын жасоо жана оңдоо. Чиптүү ачкычтын көчүрмөсүн жасайбыз, смарт-ачкычты оңдойбуз. Бишкекке жана анын чет жакасына чыгабыз.', 'ky: неверный SEO description')
+    check(decodeHtml(description) === 'Бишкекте унаа ачкычтарын жасоо жана оңдоо. Чиптүү ачкычтын көчүрмөсүн жасайбыз, унааны ачабыз, смарт-ачкычты оңдойбуз. Бишкекке жана чет жакасына барабыз.', 'ky: неверный SEO description')
   }
   check(head.includes(`property="og:locale" content="${page.locale === 'ru' ? 'ru_KG' : 'ky_KG'}"`), `${page.locale}: неверный Open Graph locale`)
   check(head.includes(`property="og:url" content="${expectedCanonical}"`), `${page.locale}: Open Graph должен указывать на текущий адрес`)
@@ -114,8 +114,8 @@ for (const page of pages) {
   check(head.includes(`property="og:title" content="${decodeHtml(stripTags(title))}"`), `${page.locale}: Open Graph title должен соответствовать title`)
   check(head.includes(`name="twitter:title" content="${decodeHtml(stripTags(title))}"`), `${page.locale}: Twitter title должен соответствовать title`)
   check(head.includes(page.image), `${page.locale}: неверное Open Graph изображение`)
-  check(head.includes('property="og:image:width" content="1536"'), `${page.locale}: неверная ширина Open Graph изображения`)
-  check(head.includes('property="og:image:height" content="1024"'), `${page.locale}: неверная высота Open Graph изображения`)
+  check(head.includes('property="og:image:width" content="1200"'), `${page.locale}: неверная ширина Open Graph изображения`)
+  check(head.includes('property="og:image:height" content="630"'), `${page.locale}: неверная высота Open Graph изображения`)
   const ogImageUrl = head.match(/<meta\s+property="og:image"\s+content="([^"]+)"/i)?.[1]
   if (ogImageUrl) {
     const ogImagePath = new URL(ogImageUrl).pathname.replace(`${canonicalBase}/`, '')
@@ -129,11 +129,14 @@ for (const page of pages) {
     const serviceEntries = business.hasOfferCatalog?.itemListElement ?? []
     check(business['@id']?.endsWith('#business'), `${page.locale}: ID бизнеса должен быть стабильным`)
     check(business.name === 'autozamok', `${page.locale}: данные мастерской должны содержать autozamok`)
-    check(business.telephone === '+996704499678', `${page.locale}: телефон JSON-LD должен совпадать с контактами`)
+    check(business.telephone === '+996704499678', `${page.locale}: основной телефон JSON-LD должен совпадать с контактами`)
+    const contactPhones = business.contactPoint?.map((point) => point.telephone) ?? []
+    check(contactPhones.includes('+996704499678') && contactPhones.includes('+996553465056'), `${page.locale}: JSON-LD должен содержать оба номера в ContactPoint`)
     check(business.sameAs?.includes('https://wa.me/996704499678') && business.sameAs?.includes('https://t.me/battali'), `${page.locale}: sameAs должен содержать реальные контакты`)
     check(business.hasMap === 'https://www.google.com/maps/dir/?api=1&destination=42.874412%2C74.521848', `${page.locale}: ссылка на карту должна быть в Locksmith JSON-LD`)
     check(business.areaServed?.name === (page.locale === 'ru' ? 'Бишкек и пригород' : 'Бишкек жана анын чет жакасы'), `${page.locale}: зона выезда JSON-LD должна быть локализована и ограничена Бишкеком и пригородом`)
-    check(serviceEntries.length === 6 && serviceEntries.every((service) => service['@type'] === 'Service' && service.name && service.description), `${page.locale}: JSON-LD должен содержать шесть локализованных реальных услуг типа Service`)
+    check(serviceEntries.length === 7 && serviceEntries.every((service) => service['@type'] === 'Service' && service.name && service.description), `${page.locale}: JSON-LD должен содержать семь локализованных реальных услуг типа Service`)
+    check(serviceEntries.some((service) => service.name === (page.locale === 'ru' ? 'Автовскрытие' : 'Унааны ачуу')), `${page.locale}: автовскрытие должно быть локализовано в каталоге услуг`)
     for (const service of serviceEntries) {
       check(text.includes(service.name), `${page.locale}: название услуги JSON-LD должно быть на странице`)
       check(text.includes(service.description), `${page.locale}: описание услуги JSON-LD должно быть на странице`)
@@ -144,7 +147,7 @@ for (const page of pages) {
   if (faqSchema) {
     const faqText = text
     const questions = faqSchema.mainEntity ?? []
-    check(questions.length === 6, `${page.locale}: FAQPage должен совпадать с шестью видимыми вопросами`)
+    check(questions.length === 7, `${page.locale}: FAQPage должен совпадать с семью видимыми вопросами`)
     for (const question of questions) {
       check(faqText.includes(question.name), `${page.locale}: вопрос JSON-LD должен быть видимым на странице`)
       check(faqText.includes(question.acceptedAnswer?.text ?? '\0'), `${page.locale}: ответ JSON-LD должен быть видимым на странице`)
@@ -160,13 +163,17 @@ for (const page of pages) {
   check(['Ford', 'Chevrolet', 'Daewoo'].every((brand) => text.includes(brand)), `${page.locale}: в списке марок должны быть Ford, Chevrolet и Daewoo`)
   check(!/<meta\s+name="keywords"/i.test(head), `${page.locale}: не должно быть meta keywords`)
   check(!/стоимость|цена|цены|гаранти|30 минут|10\+ лет|5000\+|по регионам/i.test(text), `${page.locale}: найдены запрещённые цены или неподтверждённые обещания`)
-  check(!/продажа ключей|иммобилайзер|вскрытие|круглосуточ/i.test(text), `${page.locale}: найдена неподтверждённая услуга`)
+  check(!/продажа ключей|иммобилайзер|круглосуточ/i.test(text), `${page.locale}: найдена неподтверждённая услуга`)
+  check(text.includes('0704 499 678') && text.includes('0553 465 056'), `${page.locale}: оба номера должны быть видны на странице`)
+  check(html.includes('href="tel:+996704499678"') && html.includes('href="tel:+996553465056"'), `${page.locale}: оба номера должны звонить по корректным tel-ссылкам`)
+  check(text.includes('О!') && text.includes('MEGA'), `${page.locale}: операторы номеров должны быть подписаны`)
 
   const anchors = [...html.matchAll(/<a\b[^>]*>/gi)].map(([tag]) => ({ tag, href: attr(tag, 'href') }))
   const languageHrefs = anchors.map(({ href }) => href)
   check(languageHrefs.includes(`${deploymentBase}/`) && languageHrefs.includes(`${deploymentBase}/ky/`), `${page.locale}: переключатель должен содержать ссылки на оба языка с локальным basePath`)
   const whatsapp = anchors.filter(({ href }) => href.startsWith('https://wa.me/'))
-  check(whatsapp.length >= 8, `${page.locale}: должны быть ссылки WhatsApp из всех разделов`)
+  check(whatsapp.length >= 5, `${page.locale}: должны остаться ссылки WhatsApp из основных разделов`)
+  check(whatsapp.some(({ tag }) => attr(tag, 'aria-label') === 'WhatsApp'), `${page.locale}: кнопка WhatsApp в первом экране должна иметь точную доступную подпись`)
   check(whatsapp.every(({ href }) => href.startsWith('https://wa.me/996704499678?text=')), `${page.locale}: все черновики должны вести на текущий номер`)
   for (const { href } of whatsapp) {
     let draft = ''
@@ -177,6 +184,55 @@ for (const page of pages) {
     }
     check(page.locale === 'ru' ? draft.includes('Марка, модель и год автомобиля') : draft.includes('маркасы, модели жана чыгарылган жылы'), `${page.locale}: черновик WhatsApp должен просить данные автомобиля на нужном языке`)
     check(!/стоимость|цена|баасы/i.test(draft), `${page.locale}: в черновике WhatsApp не должно быть цены`)
+  }
+  const serviceTopics = page.locale === 'ru'
+    ? [
+        'Изготовление ключей и дубликатов',
+        'Изготовление по замку при потере всех ключей',
+        'Ремонт автомобильных ключей',
+        'Программирование чипов',
+        'Ремонт и замена смарт-ключей',
+        'Выезд по Бишкеку и пригороду',
+        'Автовскрытие',
+      ]
+    : [
+        'Ачкыч жасоо жана көчүрмөсү',
+        'Бардык ачкыч жоголсо, кулпудан жасоо',
+        'Авто ачкычты оңдоо',
+        'Чипти программалоо',
+        'Смарт-ачкычты оңдоо жана алмаштыруу',
+        'Бишкекке жана чет жакасына чыгуу',
+        'Унааны ачуу',
+      ]
+  const serviceActionLabel = page.locale === 'ru' ? 'Уточнить в WhatsApp' : 'WhatsApp аркылуу тактоо'
+  const serviceInquiries = anchors.filter(({ tag }) =>
+    decodeHtml(attr(tag, 'aria-label')).startsWith(`${serviceActionLabel}: `),
+  )
+  check(serviceInquiries.length === 7, `${page.locale}: у каждой из семи услуг должна быть своя кнопка уточнения`)
+  const visibleServiceActionCount = [...html.matchAll(/<a\b[^>]*>[\s\S]*?<\/a>/gi)].filter(([markup]) => {
+    const tag = markup.match(/^<a\b[^>]*>/i)?.[0] ?? ''
+    return (
+      decodeHtml(attr(tag, 'aria-label')).startsWith(`${serviceActionLabel}: `) &&
+      stripTags(markup).includes(serviceActionLabel)
+    )
+  }).length
+  check(visibleServiceActionCount === 7, `${page.locale}: полный текст кнопки должен быть виден у каждой из семи услуг`)
+  for (const topic of serviceTopics) {
+    const inquiry = serviceInquiries.find(({ tag }) => decodeHtml(attr(tag, 'aria-label')) === `${serviceActionLabel}: ${topic}`)
+    check(Boolean(inquiry), `${page.locale}: должна быть доступная кнопка для услуги «${topic}»`)
+    if (inquiry) {
+      let draft = ''
+      try {
+        draft = decodeURIComponent(inquiry.href.split('?text=')[1] ?? '')
+      } catch {
+        check(false, `${page.locale}: черновик услуги «${topic}» должен быть корректно закодирован`)
+      }
+      check(draft.includes(topic), `${page.locale}: черновик должен спрашивать именно об услуге «${topic}»`)
+      check(
+        page.locale === 'ru' ? draft.startsWith(`Здравствуйте! Интересует: ${topic}.`) : draft.startsWith(`Саламатсызбы! ${topic} боюнча`),
+        `${page.locale}: черновик услуги «${topic}» должен быть локализован`,
+      )
+    }
   }
   const imageTags = [...html.matchAll(/<img\b[^>]*>/gi)].map(([tag]) => tag)
   check(imageTags.length >= 1, `${page.locale}: фоновое изображение должно быть отрисовано в HTML`)

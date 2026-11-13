@@ -1,0 +1,83 @@
+# Автопубликация сайта autozamok.kg
+# Когда в ветку main приходят новые изменения, GitHub сам:
+#   1. проверяет проект (тесты, типы, стиль кода),
+#   2. собирает сайт,
+#   3. проверяет готовые страницы,
+#   4. загружает файлы на хостинг Hostia по FTP.
+# Если любая проверка не прошла, на сайт ничего не уходит.
+
+name: Публикация сайта
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: # можно запустить вручную кнопкой на GitHub
+
+# Две публикации одновременно не запускаем
+concurrency:
+  group: deploy-hostia
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      HUSKY: '0'
+      NEXT_TELEMETRY_DISABLED: '1'
+    steps:
+      - name: Получить код
+        uses: actions/checkout@v4
+
+      - name: Установить pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Установить Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Установить зависимости
+        run: pnpm install --frozen-lockfile
+
+      - name: Проверка контактов и текстов
+        run: pnpm test
+
+      - name: Проверка типов
+        run: pnpm typecheck
+
+      - name: Проверка стиля кода
+        run: pnpm lint
+
+      - name: Собрать сайт
+        run: pnpm build
+
+      - name: Проверить готовые страницы
+        run: pnpm test:built
+
+      - name: Загрузить сайт на Hostia
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: 95.217.206.171
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          security: loose
+          local-dir: ./out/
+          server-dir: ./
+          # Лишние файлы, которые сайту не нужны
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            images/car.mp4
+            images/logo.png
+            images/hero-locksmith*.png
+            images/ChatGPT*
+            .nojekyll

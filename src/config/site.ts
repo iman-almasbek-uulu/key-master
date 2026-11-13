@@ -2,6 +2,23 @@ import publicSite from '@/src/config/public-site.json'
 
 const defaultSiteUrl = publicSite.url
 
+export const contactPhones = [
+  {
+    id: 'primary',
+    number: '+996704499678',
+    display: '0704 499 678',
+    operator: 'О!',
+    href: 'tel:+996704499678',
+  },
+  {
+    id: 'secondary',
+    number: '+996553465056',
+    display: '0553 465 056',
+    operator: 'MEGA',
+    href: 'tel:+996553465056',
+  },
+] as const
+
 function normalizeSiteUrl(value: string) {
   return value.endsWith('/') ? value : `${value}/`
 }
@@ -9,8 +26,8 @@ function normalizeSiteUrl(value: string) {
 export const siteConfig = {
   name: 'autozamok',
   city: 'Бишкек',
-  phone: '+996704499678',
-  phoneDisplay: '+996 704 499 678',
+  phone: contactPhones[0].number,
+  phoneDisplay: contactPhones[0].display,
   workingHours: 'Ежедневно с 9:00 до 21:00',
   workingHoursShort: '9:00–21:00',
   url: normalizeSiteUrl(process.env.NEXT_PUBLIC_SITE_URL ?? defaultSiteUrl),
@@ -52,6 +69,6 @@ export function localePath(locale: 'ru' | 'ky') {
 }
 
 export const ogImageUrl = new URL(
-  'images/generated/og-key-master.jpg',
+  'images/generated/og-autozamok.jpg',
   siteConfig.url,
 ).toString()

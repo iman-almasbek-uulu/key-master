@@ -1,9 +1,9 @@
-import { siteConfig } from '@/src/config/site'
+import { contactPhones, siteConfig } from '@/src/config/site'
 
 const whatsappNumber = siteConfig.phone.replace(/\D/g, '')
 
 export const contactLinks = {
-  call: `tel:${siteConfig.phone}`,
+  call: contactPhones[0].href,
   whatsapp: `https://wa.me/${whatsappNumber}`,
   telegram: 'https://t.me/battali',
   route:
