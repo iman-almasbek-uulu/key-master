@@ -67,8 +67,9 @@ jobs:
           server: 95.217.206.171
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftps
-          security: loose
+          # Защищённый FTPS у Hostia обрывает передачу файлов (ECONNRESET),
+          # поэтому используем обычный FTP. Аккаунт ограничен папкой сайта.
+          protocol: ftp
           local-dir: ./out/
           server-dir: ./
           # Лишние файлы, которые сайту не нужны
