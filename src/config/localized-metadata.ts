@@ -28,10 +28,26 @@ export function metadataFor(locale: Locale): Metadata {
       },
     },
     icons: {
+      // Иконка — «ключ» из логотипа. Google показывает в поиске PNG кратного 48 px (48, 96, 192)
       icon: [
+        { url: assetPath('/favicon.ico'), sizes: 'any' },
+        {
+          url: assetPath('/images/generated/icon.svg'),
+          type: 'image/svg+xml',
+        },
         {
           url: assetPath('/images/generated/favicon-32.png'),
           sizes: '32x32',
+          type: 'image/png',
+        },
+        {
+          url: assetPath('/images/generated/favicon-48.png'),
+          sizes: '48x48',
+          type: 'image/png',
+        },
+        {
+          url: assetPath('/images/generated/favicon-192.png'),
+          sizes: '192x192',
           type: 'image/png',
         },
       ],

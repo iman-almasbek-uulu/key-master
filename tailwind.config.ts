@@ -9,6 +9,14 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+        // Макет «компьютер» из дизайна включается с 1100 px
+        desk: '1100px',
+      },
+      fontFamily: {
+        display: ['var(--font-display)', 'Roboto Condensed', 'sans-serif'],
+        body: ['var(--font-body)', 'Inter', 'sans-serif'],
+      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
@@ -20,6 +28,11 @@ const config: Config = {
         sm: 'calc(var(--radius) - 4px)',
       },
       colors: {
+        ink: '#0E1013',
+        panel: '#1A1D20',
+        brand: '#FFC400',
+        wa: '#25D366',
+        fog: '#F2F3F5',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {

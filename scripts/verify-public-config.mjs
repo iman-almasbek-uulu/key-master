@@ -48,7 +48,9 @@ assert.match(copy, /Автоключи в Бишкеке — изготовле�
 assert.match(copy, /Бишкекте унаа ачкычтарын жасоо жана оңдоо \| \$\{siteConfig\.name\}/)
 assert.match(copy, /\$\{siteConfig\.name\} Бишкек — на главную/)
 assert.match(copy, /\$\{siteConfig\.name\} Бишкек — башкы бет/)
-assert.match(header, /\{siteConfig\.name\}/)
+// В шапке теперь SVG-логотип «autozamok», подпись для скринридеров берётся из homeLabel
+assert.match(header, /<Logo\b/)
+assert.match(header, /copy\.homeLabel/)
 assert.match(footer, /\{siteConfig\.name\}/)
 assert.doesNotMatch(`${header}\n${footer}`, /logo-mark\.webp|БИШКЕК/)
 assert.match(metadata, /title: copy\.title/)

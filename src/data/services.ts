@@ -1,11 +1,12 @@
+// Порядок как в новом дизайне: автовскрытие и работа по замку идут сразу после изготовления.
 export const services = [
-  { id: 'manufacturing', icon: 'key' },
-  { id: 'unlocking', icon: 'key' },
-  { id: 'recovery', icon: 'shield-check' },
-  { id: 'repair', icon: 'wrench' },
-  { id: 'programming', icon: 'cpu' },
-  { id: 'smart', icon: 'key' },
-  { id: 'on-site', icon: 'map-pin' },
+  { id: 'manufacturing' },
+  { id: 'unlocking' },
+  { id: 'recovery' },
+  { id: 'repair' },
+  { id: 'programming' },
+  { id: 'smart' },
+  { id: 'on-site' },
 ] as const
 
 export type ServiceId = (typeof services)[number]['id']
