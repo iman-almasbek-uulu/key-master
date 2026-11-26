@@ -36,7 +36,7 @@ export function WhereSection({ locale }: { locale: Locale }) {
             </div>
             <div className="flex">
               <a
-                href={contactLinks.route}
+                href={contactLinks.route2gis}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex min-h-14 items-center justify-center rounded-[14px] border-2 border-brand bg-brand px-7 text-base font-bold text-ink transition-opacity hover:opacity-90"

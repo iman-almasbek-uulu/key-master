@@ -8,6 +8,9 @@ export const contactLinks = {
   telegram: 'https://t.me/battali',
   route:
     'https://www.google.com/maps/dir/?api=1&destination=42.874412%2C74.521848',
+  // Кнопка «Построить маршрут»: маршрут до мастерской в 2ГИС (долгота,широта)
+  route2gis:
+    'https://2gis.kg/bishkek/routeSearch/rsType/car/to/74.521848,42.874412',
   // Ссылка «на карте» в первом экране: поиск по адресу мастерской
   mapSearch:
     'https://www.google.com/maps/search/?api=1&query=%D0%9F%D1%80%D0%BE%D1%81%D0%BF%D0%B5%D0%BA%D1%82%20%D0%94%D1%8D%D0%BD%20%D0%A1%D1%8F%D0%BE%D0%BF%D0%B8%D0%BD%D0%B0%20457%D0%BA%20%D0%91%D0%B8%D1%88%D0%BA%D0%B5%D0%BA',
