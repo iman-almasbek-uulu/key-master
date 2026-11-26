@@ -1,36 +1,40 @@
 import { Container } from '@/src/components/ui/container'
-import { Reveal } from '@/src/components/ui/reveal'
-import { Section } from '@/src/components/ui/section'
-import { getCopy, type Locale } from '@/src/i18n/site-copy'
+import { type Locale, getCopy } from '@/src/i18n/site-copy'
 
 export function StepsSection({ locale }: { locale: Locale }) {
   const copy = getCopy(locale)
+
   return (
-    <Section id="steps" className="border-b border-white/[0.06] bg-[#0b0d10] py-14 md:py-20">
+    <section
+      id="steps"
+      className="bg-brand py-12 text-ink desk:py-20"
+    >
       <Container>
-        <Reveal className="max-w-2xl">
-          <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl md:text-4xl">
-            {copy.steps.title}
-          </h2>
-        </Reveal>
-        <ol className="mt-5 grid gap-0 md:grid-cols-2 md:gap-x-8">
-          {copy.steps.items.map(([title, description], index) => {
-            return (
-              <li key={title} className="border-t border-white/[0.08] py-3.5">
-                <Reveal delay={index * 50} className="flex items-start gap-3.5">
-                  <span className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-sky-300/30 text-xs font-semibold tabular-nums text-sky-300">
-                    {index + 1}
-                  </span>
-                  <div>
-                    <h3 className="text-sm font-semibold leading-snug text-white sm:text-base">{title}</h3>
-                    <p className="mt-1 text-sm leading-relaxed text-zinc-400">{description}</p>
-                  </div>
-                </Reveal>
-              </li>
-            )
-          })}
+        <h2 className="section-title text-[clamp(32px,10.25vw,40px)] desk:text-[clamp(44px,4.44vw,64px)]">
+          {copy.steps.title}
+        </h2>
+        <ol className="mt-6 grid grid-cols-1 gap-7 desk:mt-10 desk:grid-cols-4 desk:gap-x-10">
+          {copy.steps.items.map(([title, description], index) => (
+            <li
+              key={title}
+              className="flex gap-[18px] desk:flex-col desk:gap-3"
+            >
+              <span
+                aria-hidden="true"
+                className="section-title text-[56px] leading-[.9] desk:text-[clamp(64px,6.67vw,96px)]"
+              >
+                {index + 1}
+              </span>
+              <div className="flex flex-col gap-1.5">
+                <h3 className="section-title text-[26px] leading-tight">
+                  {title}
+                </h3>
+                <p className="text-[15px] leading-[1.55]">{description}</p>
+              </div>
+            </li>
+          ))}
         </ol>
       </Container>
-    </Section>
+    </section>
   )
 }

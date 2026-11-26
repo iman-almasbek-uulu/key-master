@@ -1,52 +1,48 @@
 import { Container } from '@/src/components/ui/container'
-import { Reveal } from '@/src/components/ui/reveal'
-import { Section } from '@/src/components/ui/section'
-import { brandGroups, getCopy, type Locale } from '@/src/i18n/site-copy'
+import { type Locale, brandGroups, getCopy } from '@/src/i18n/site-copy'
 
 export function BrandsSection({ locale }: { locale: Locale }) {
   const copy = getCopy(locale)
+
   return (
-    <Section
+    <section
       id="brands"
-      className="border-b border-white/[0.06] bg-[#0b0d10] py-14 md:py-20"
+      className="bg-ink py-12 text-white desk:py-20"
     >
       <Container>
-        <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-start lg:gap-16">
-          <Reveal>
-            <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl md:text-4xl">
-              {copy.brands.title}
-            </h2>
-            <p className="mt-3 max-w-md text-sm leading-relaxed text-zinc-400 sm:text-base">
-              {copy.brands.description}
-            </p>
-            <p className="mt-3 max-w-md text-sm leading-relaxed text-zinc-500">
-              {copy.brands.detail}
-            </p>
-          </Reveal>
+        <h2 className="section-title text-[clamp(32px,10.25vw,40px)] desk:text-[clamp(44px,4.44vw,64px)]">
+          {copy.brands.title}
+        </h2>
+        <p className="mt-6 max-w-3xl text-base text-[#C3C9D0] desk:mt-10">
+          {copy.brands.description}
+        </p>
+        <p className="mt-3 max-w-3xl text-sm leading-relaxed text-[#A7AFB8]">
+          {copy.brands.detail}
+        </p>
 
-          <Reveal delay={80}>
-            <div className="space-y-5">
-              {brandGroups.map((group) => (
-                <div key={group.id}>
-                  <h3 className="text-[11px] font-medium uppercase tracking-[0.16em] text-zinc-500">
-                    {copy.brands.groups[group.id]}
-                  </h3>
-                  <ul className="mt-2 flex flex-wrap gap-2">
-                    {group.brands.map((brand) => (
-                      <li
-                        key={brand}
-                        className="rounded-lg border border-white/10 bg-white/[0.03] px-3.5 py-2 text-sm text-zinc-300 transition-colors hover:border-sky-300/25 hover:text-zinc-100"
-                      >
-                        {brand}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
+        <div className="mt-6 flex flex-col gap-5 desk:mt-10">
+          {brandGroups.map((group) => (
+            <div
+              key={group.id}
+              className="flex flex-col items-start gap-2 border-t border-[#343A41] pt-[18px] desk:flex-row desk:items-baseline desk:gap-8"
+            >
+              <h3 className="text-sm font-bold text-brand desk:w-[220px] desk:flex-none">
+                {copy.brands.groups[group.id]}
+              </h3>
+              <ul className="flex flex-wrap gap-x-5 gap-y-1.5 desk:gap-x-10 desk:gap-y-2">
+                {group.brands.map((brand) => (
+                  <li
+                    key={brand}
+                    className="section-title text-[26px] desk:text-[clamp(30px,2.78vw,40px)]"
+                  >
+                    {brand}
+                  </li>
+                ))}
+              </ul>
             </div>
-          </Reveal>
+          ))}
         </div>
       </Container>
-    </Section>
+    </section>
   )
 }

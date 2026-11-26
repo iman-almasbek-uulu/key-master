@@ -5,10 +5,11 @@ interface ContainerProps {
   className?: string
 }
 
+/** Поля как в дизайне: 20 px на телефоне, до 80 px на компьютере (макет 1440 px). */
 export function Container({ children, className = '' }: ContainerProps) {
   return (
     <div
-      className={`container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl ${className}`}
+      className={`mx-auto w-full max-w-[640px] px-5 desk:max-w-[1440px] desk:px-[clamp(40px,5.56vw,80px)] ${className}`}
     >
       {children}
     </div>

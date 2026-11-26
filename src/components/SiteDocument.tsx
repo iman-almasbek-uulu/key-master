@@ -1,17 +1,21 @@
-import { Barlow_Semi_Condensed, Inter } from 'next/font/google'
+import { Inter, Roboto_Condensed } from 'next/font/google'
+
 import type { ReactNode } from 'react'
 
 import '@/src/app/globals.css'
 import { structuredData } from '@/src/config/localized-metadata'
-import { getCopy, type Locale } from '@/src/i18n/site-copy'
+import { type Locale, getCopy } from '@/src/i18n/site-copy'
 
-const inter = Inter({ subsets: ['latin', 'cyrillic', 'cyrillic-ext'] })
-const brandFont = Barlow_Semi_Condensed({
-  weight: '700',
-  style: 'italic',
-  subsets: ['latin'],
+const inter = Inter({
+  subsets: ['latin', 'cyrillic', 'cyrillic-ext'],
   display: 'swap',
-  variable: '--font-brand',
+  variable: '--font-body',
+})
+const displayFont = Roboto_Condensed({
+  weight: '800',
+  subsets: ['latin', 'cyrillic', 'cyrillic-ext'],
+  display: 'swap',
+  variable: '--font-display',
 })
 
 export function SiteDocument({
@@ -24,10 +28,10 @@ export function SiteDocument({
   const copy = getCopy(locale)
   return (
     <html lang={copy.htmlLang}>
-      <body className={`${inter.className} ${brandFont.variable}`}>
+      <body className={`${inter.variable} ${displayFont.variable}`}>
         <a
           href="#main"
-          className="sr-only rounded-lg bg-sky-300 px-4 py-3 font-medium text-slate-950 focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[70]"
+          className="sr-only rounded-lg bg-brand px-4 py-3 font-bold text-ink focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[70]"
         >
           {copy.skipLink}
         </a>

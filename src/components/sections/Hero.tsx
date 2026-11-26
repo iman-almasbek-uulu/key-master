@@ -1,100 +1,169 @@
-import { Clock, MessageCircle, Phone } from 'lucide-react'
+import { Header } from '@/src/components/layout/Header'
+import { OpenStatus } from '@/src/components/ui/open-status'
+import {
+  contactLinks,
+  defaultWhatsAppLink,
+  whatsappWithMessage,
+} from '@/src/config/links'
+import { assetPath, contactPhones } from '@/src/config/site'
+import { type Locale, getCopy } from '@/src/i18n/site-copy'
 
-import { Container } from '@/src/components/ui/container'
-import { defaultWhatsAppLink } from '@/src/config/links'
-import { assetPath, contactPhones, siteConfig } from '@/src/config/site'
-import { getCopy, type Locale } from '@/src/i18n/site-copy'
+const phoneButton =
+  'flex flex-col items-center justify-center rounded-[14px] border-2 border-brand text-center transition-transform active:scale-[0.99]'
+const phoneNumber =
+  'whitespace-nowrap font-display font-extrabold leading-[1.1]'
 
 export function Hero({ locale }: { locale: Locale }) {
   const copy = getCopy(locale)
+  const { hero } = copy
+  const [first, second] = contactPhones
+  const [lineA, lineB, lineC] = hero.headline
+
   return (
     <section
       id="top"
-      className="relative isolate min-h-[calc(100svh-4rem)] overflow-hidden border-b border-white/[0.06] bg-[#0b0d10] md:min-h-[calc(100svh-4.75rem)]"
+      className="relative h-[844px] overflow-hidden bg-panel text-white desk:h-[660px]"
     >
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0"
-      >
-        <picture className="absolute inset-0 block">
+      <div className="hero-photo absolute left-1/2 top-[120px] h-[698px] w-full max-w-[560px] -translate-x-1/2 overflow-hidden desk:left-auto desk:right-0 desk:top-10 desk:h-[530px] desk:w-[min(640px,44.5vw)] desk:max-w-none desk:translate-x-0">
+        <picture>
           <source
-            media="(min-width: 768px)"
+            media="(min-width: 1100px)"
             srcSet={assetPath('/images/generated/hero-locksmith-wide.webp')}
             type="image/webp"
           />
           <img
             src={assetPath('/images/generated/hero-locksmith-phone.webp')}
-            alt=""
+            alt={hero.imageAlt}
             fetchPriority="high"
-            className="h-full w-full object-cover object-[center_bottom]"
+            className="h-full w-full object-cover desk:absolute desk:right-0 desk:top-1/2 desk:h-auto desk:w-[146%] desk:max-w-none desk:-translate-y-1/2"
           />
         </picture>
-        <span className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(11,13,16,0.94)_0%,rgba(11,13,16,0.78)_52%,rgba(11,13,16,0.56)_100%)]" />
       </div>
 
-      <Container className="relative z-10 flex min-h-[inherit] items-center justify-center py-6 sm:py-10">
-        <div className="w-full min-w-0 max-w-[780px] text-center">
-          <h1 className="hero-enter text-balance text-[1.8rem] leading-[1.12] tracking-[-0.025em] text-zinc-50 sm:text-[2.5rem] lg:text-[3rem]">
-            {copy.hero.cityFirst ? (
+      <div className="relative z-10 mx-auto h-full w-full max-w-[560px] px-5 desk:max-w-[1440px] desk:px-[clamp(40px,5.56vw,80px)]">
+        <Header locale={locale} />
+
+        <div className="flex flex-col gap-[9px] desk:mt-4 desk:w-[min(760px,52.8vw)] desk:gap-3.5">
+          <OpenStatus
+            open={hero.open}
+            closed={hero.closed}
+            fallback={copy.contact.hoursValue}
+          />
+
+          <p
+            className={`font-display font-extrabold uppercase leading-[.92] desk:text-[clamp(56px,6.11vw,88px)] desk:leading-[.9] ${
+              hero.headlineLastBlock
+                ? 'text-[clamp(38px,12.3vw,48px)]'
+                : 'text-[clamp(40px,12.8vw,50px)]'
+            }`}
+          >
+            {lineA}
+            <br className="desk:hidden" /> {lineB}
+            <br className="hidden desk:block" />{' '}
+            <span
+              className={`text-brand ${hero.headlineLastBlock ? 'block desk:inline' : ''}`}
+            >
+              {lineC}
+            </span>
+          </p>
+
+          <h1 className="text-balance text-lg font-bold leading-snug text-white desk:text-[22px]">
+            {hero.cityFirst ? (
               <>
-                <span className="text-sky-300">{copy.hero.city}</span>{' '}
-                {copy.hero.title}
+                {hero.city} {hero.title}
               </>
             ) : (
               <>
-                {copy.hero.title}{' '}
-                <span className="text-sky-300">{copy.hero.city}</span>
+                {hero.title} {hero.city}
               </>
             )}
           </h1>
 
-          <p className="brand-wordmark hero-enter hero-enter-delay-1 mt-1 text-[3.25rem] leading-[0.98] tracking-[-0.035em] text-sky-300 sm:text-[4.1rem] lg:text-[5.25rem]">
-            {siteConfig.name}
+          <p className="max-w-[340px] text-[15px] leading-normal text-[#D5DAE0] desk:max-w-[620px] desk:text-lg desk:leading-normal">
+            <span className="desk:hidden">{hero.leadShort}</span>
+            <span className="hidden desk:inline">{hero.lead}</span>
           </p>
 
-          <div className="hero-enter hero-enter-delay-2 mx-auto mt-4 grid w-full max-w-[760px] gap-2 sm:mt-5 md:grid-cols-3">
-            {contactPhones.map((phone) => (
-              <a
-                key={phone.id}
-                href={phone.href}
-                aria-label={`${copy.call}: ${phone.display}`}
-                className="group flex min-h-12 min-w-0 w-full items-center gap-2 rounded-xl border border-white/10 bg-[#151b21] px-3 text-zinc-50 transition-colors hover:border-sky-300/35 hover:bg-[#1a2229] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0b0d10]"
+          <div className="mt-1 grid grid-cols-2 gap-2 desk:grid-cols-3 desk:gap-3">
+            <a
+              href={first.href}
+              aria-label={`${copy.call}: ${first.display}`}
+              className={`${phoneButton} col-span-2 h-[68px] bg-brand text-ink desk:col-span-1 desk:h-[76px]`}
+            >
+              <span className="text-xs font-bold">{copy.call}</span>
+              <span
+                className={`${phoneNumber} text-[34px] desk:text-[clamp(24px,2.64vw,38px)]`}
               >
-                <Phone size={17} aria-hidden="true" className="shrink-0 text-[#79cefa]" />
-                <span className="min-w-0 flex-1 whitespace-nowrap text-sm font-semibold tabular-nums tracking-[0.01em] transition-colors group-hover:text-sky-100 sm:text-[15px]">
-                  {phone.display}
-                </span>
-                <span className="shrink-0 text-xs text-zinc-400 transition-colors group-hover:text-zinc-200 sm:text-[13px]">
-                  {copy.call}
-                </span>
-              </a>
-            ))}
+                {first.display}
+              </span>
+            </a>
+            <a
+              href={second.href}
+              aria-label={`${copy.call}: ${second.display}`}
+              className={`${phoneButton} h-[60px] bg-ink/85 text-white desk:h-[76px]`}
+            >
+              <span className="text-xs font-bold">{copy.call}</span>
+              <span
+                className={`${phoneNumber} text-[clamp(21px,6.4vw,25px)] desk:text-[clamp(24px,2.64vw,38px)]`}
+              >
+                {second.display}
+              </span>
+            </a>
             <a
               href={defaultWhatsAppLink(locale)}
               aria-label="WhatsApp"
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex min-h-12 w-full items-center justify-center gap-2 rounded-xl border border-[#8cdbb0]/30 bg-[#173428] px-3 text-zinc-50 transition-colors hover:border-[#8cdbb0]/55 hover:bg-[#1c4031] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8cdbb0] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0b0d10]"
+              className="flex h-[60px] flex-col items-center justify-center rounded-[14px] border-2 border-wa bg-wa text-center text-[#06210F] transition-transform active:scale-[0.99] desk:h-[76px]"
             >
-              <MessageCircle size={18} aria-hidden="true" className="shrink-0 text-[#8cdbb0]" />
-              <span className="text-sm font-semibold transition-colors group-hover:text-white sm:text-[15px]">
-                {copy.whatsappShort}
+              <span className="text-xs font-bold">{hero.writeIn}</span>
+              <span
+                className={`${phoneNumber} text-[clamp(21px,6.4vw,25px)] desk:text-[clamp(22px,2.22vw,32px)]`}
+              >
+                WhatsApp
               </span>
             </a>
           </div>
 
-          <p className="hero-enter hero-enter-delay-2 mx-auto mt-3 flex max-w-full items-center justify-center gap-2 text-center text-sm leading-snug text-zinc-100/90">
-            <Clock size={16} className="shrink-0 text-sky-300" aria-hidden="true" />
-            {copy.contact.hoursValue}
-          </p>
+          <a
+            href={contactLinks.mapSearch}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="absolute bottom-2.5 left-4 right-4 flex min-h-9 items-center justify-center text-xs text-[#C3C9D0] hover:text-white desk:static desk:min-h-8 desk:justify-start desk:text-sm"
+          >
+            {hero.addressLine} · {hero.onMap}
+          </a>
         </div>
-      </Container>
+      </div>
 
-      <div
-        id="hero-end"
-        aria-hidden="true"
-        className="absolute bottom-0 left-0 h-px w-px"
-      />
+      <ul className="absolute inset-x-[calc(clamp(40px,5.56vw,80px)-28px)] bottom-0 hidden h-24 border-t border-[#343A41] desk:flex">
+        {hero.situations.map((item, index) => (
+          <li
+            key={item.title}
+            className={`flex flex-1 ${index > 0 ? 'border-l border-[#343A41]' : ''}`}
+          >
+            <a
+              href={whatsappWithMessage(item.draft)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex w-full items-center gap-5 px-7 transition-colors hover:bg-white/[0.04]"
+            >
+              <span
+                aria-hidden="true"
+                className="font-display text-[44px] font-extrabold text-brand"
+              >
+                {index + 1}
+              </span>
+              <span className="flex flex-col gap-1">
+                <span className="text-[clamp(15px,1.25vw,18px)] font-bold">
+                  {item.title}
+                </span>
+                <span className="text-sm text-[#B5BDC6]">{item.text}</span>
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
     </section>
   )
 }
